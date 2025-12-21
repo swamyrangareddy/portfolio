@@ -1,14 +1,17 @@
 import { useRef, useEffect } from 'react';
-import SplitText from './SplitText';
 import backpackIll from '../assets/backpack.png';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   SiReact, SiTailwindcss, SiFlask, SiMongodb, SiPython, 
-  SiStreamlit, SiGreensock, SiMui, SiGoogle, SiKeras,
-  SiHtml5, SiCss3, SiJavascript, SiGit, SiDocker, SiLinux,
-  SiPostgresql, SiNodedotjs
+  SiStreamlit, SiMui, SiGoogle, SiKeras,
+  SiHtml5, SiCss3, SiJavascript, SiGit, SiDocker,
+  SiPostgresql, SiNodedotjs, SiPytorch, SiTensorflow, 
+  SiHuggingface, SiFastapi, SiSqlite, SiAmazon, 
+  SiGooglecloud, SiGithub, SiApachespark, SiApachehadoop, 
+  SiPlotly, SiJsonwebtokens, SiScikitlearn, SiSupabase
 } from 'react-icons/si';
+import { FaBrain, FaNetworkWired, FaDatabase, FaCloud, FaChartBar } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,52 +19,83 @@ const Skills = () => {
   // Categorized Stacks
   const categories = [
       {
-          id: 'frontend',
-          title: 'Frontend Ecosystem',
-          icon: '🎨',
-          description: 'Building responsive, pixel-perfect user interfaces.',
+          id: 'ai-ml',
+          title: 'AI & Machine Learning',
+          icon: <FaBrain />,
+          description: 'Building intelligent models for NLP, CV, and predictive analysis.',
           skills: [
-              { name: 'HTML5', icon: <SiHtml5 className="text-orange-500" /> },
-              { name: 'CSS3', icon: <SiCss3 className="text-blue-500" /> },
-              { name: 'JavaScript', icon: <SiJavascript className="text-yellow-400" /> },
-              { name: 'React.js', icon: <SiReact className="text-blue-400" /> },
-              { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-cyan-400" /> },
-              { name: 'GSAP', icon: <SiGreensock className="text-green-500" /> },
-              { name: 'Material UI', icon: <SiMui className="text-blue-500" /> },
+              { name: 'PyTorch', icon: <SiPytorch className="text-orange-600" /> },
+              { name: 'TensorFlow', icon: <SiTensorflow className="text-orange-500" /> },
+              { name: 'HuggingFace', icon: <SiHuggingface className="text-yellow-400" /> },
+              { name: 'YOLOv8', icon: <span className="font-bold text-sm bg-black text-white px-1 rounded">Y8</span> },
+              { name: 'NLP', icon: <span className="font-bold text-sm border border-current px-1 rounded">NLP</span> },
+              { name: 'Deep Learning', icon: <SiKeras className="text-red-600" /> },
+              { name: 'OpenCV', icon: <span className="font-bold text-sm border border-current px-1 rounded">CV</span> },
+              { name: 'Transformers', icon: <span className="font-bold text-sm border border-current px-1 rounded">Trans</span> },
+              { name: 'Scikit-learn', icon: <SiScikitlearn className="font-bold text-sm border border-current px-1 rounded" /> },
+              { name: 'Pandas', icon: <span className="font-bold text-sm border border-current px-1 rounded">Pd</span> },
+              { name: 'NumPy', icon: <span className="font-bold text-sm border border-current px-1 rounded">Num</span> },
           ]
       },
       {
-          id: 'backend',
-          title: 'Backend Ecosystem',
-          icon: '⚙️',
-          description: 'Scalable server-side logic and API development.',
+          id: 'programming',
+          title: 'Programming & Frameworks',
+          icon: <FaNetworkWired />,
+          description: 'Developing robust applications with modern stacks.',
           skills: [
               { name: 'Python', icon: <SiPython className="text-yellow-300" /> },
+              { name: 'JavaScript', icon: <SiJavascript className="text-yellow-400" /> },
+              { name: 'React.js', icon: <SiReact className="text-blue-400" /> },
               { name: 'Flask', icon: <SiFlask className="text-slate-500" /> },
-              { name: 'Node.js', icon: <SiNodedotjs className="text-green-600" /> }, // Inferred from projects
+              { name: 'FastAPI', icon: <SiFastapi className="text-teal-500" /> },
+              { name: 'Material UI', icon: <SiMui className="text-blue-500" /> },
+              { name: 'REST APIs', icon: <span className="font-bold text-sm">API</span> },
+              { name: 'JWT Auth', icon: <SiJsonwebtokens className="text-pink-500" /> },
+              { name: 'HTML', icon: <SiHtml5 className="text-blue-400" /> },
+              { name: 'CSS', icon: <SiCss3 className="text-blue-400" /> },
+              { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-blue-400" /> },
           ]
       },
       {
-          id: 'database',
-          title: 'Database & Tools',
-          icon: '💽',
-          description: 'Data persistence, management, and visualization.',
+          id: 'data-engineering',
+          title: 'Data & Engineering',
+          icon: <FaDatabase />,
+          description: 'Managing data pipelines, storage, and warehousing.',
           skills: [
               { name: 'MongoDB', icon: <SiMongodb className="text-green-500" /> },
-              { name: 'PostgreSQL', icon: <SiPostgresql className="text-blue-400" /> }, // Inferred from projects
-              { name: 'Streamlit', icon: <SiStreamlit className="text-red-500" /> },
+              { name: 'SQL', icon: <SiPostgresql className="text-blue-400" /> },
+              { name: 'SQLite', icon: <SiSqlite className="text-blue-300" /> },
+              { name: 'Apache Spark', icon: <SiApachespark className="text-orange-500" /> },
+              { name: 'Hadoop', icon: <SiApachehadoop className="text-yellow-500" /> },
+              { name: 'ETL Pipelines', icon: <span className="font-bold text-sm">ETL</span> },
+              {name: "PostgreSQL", icon: <SiPostgresql className="text-blue-400" /> },
           ]
       },
       {
-          id: 'ai',
-          title: 'AI & Machine Learning',
-          icon: '🤖',
-          description: 'Integrating intelligence into applications.',
+          id: 'cloud-devops',
+          title: 'Cloud & DevOps',
+          icon: <FaCloud />,
+          description: 'Deploying and managing scalable infrastructure.',
           skills: [
-              { name: 'YOLOv8', icon: <span className="font-bold text-sm">Y8</span> },
-              { name: 'Gemini API', icon: <SiGoogle className="text-blue-500" /> },
-              { name: 'Embeddings', icon: <SiKeras className="text-red-600" /> },
+              { name: 'AWS (EC2, S3, Redshift)', icon: <SiAmazon className="text-orange-500" /> },
+              { name: 'GCP (BigQuery)', icon: <SiGooglecloud className="text-blue-500" /> },
+              { name: 'Docker', icon: <SiDocker className="text-blue-400" /> },
+              { name: 'Git & GitHub', icon: <SiGithub className="text-black" /> },
+              {name: "Supabase", icon: <SiSupabase className="text-blue-400" /> },
           ]
+      },
+      {
+          id: 'visualization',
+          title: 'Visualization',
+          icon: <FaChartBar />,
+          description: 'Turning data into actionable insights.',
+          skills: [
+              { name: 'Streamlit', icon: <SiStreamlit className="text-red-500" /> },
+              { name: 'Plotly', icon: <SiPlotly className="text-blue-500" /> },
+              { name: 'Matplotlib', icon: <span className="font-bold text-sm text-blue-600">Mpl</span> },
+              {name: 'Seaborn', icon: <span className="font-bold text-sm text-blue-600">Snb</span> },
+              {name: 'PowerBI', icon: <span className="font-bold text-sm text-blue-600">PBI</span> },
+            ]
       }
   ];
 
@@ -80,18 +114,18 @@ const Skills = () => {
             </p>
             
             {/* Backpack Illustration - Floating/Sticker Style */}
-            <div className="hidden md:block absolute -top-8 right-[20%] w-32 h-32 transform rotate-12 transition-transform hover:scale-110">
+            <div className="hidden md:block absolute -top-8 right-[10%] w-32 h-32 transform rotate-12 transition-transform hover:scale-110">
                  <img src={backpackIll} alt="Survival Backpack" className="w-full h-full object-contain filter drop-shadow-[4px_4px_0px_rgba(24,24,27,0.5)]" />
             </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {categories.map((category, index) => (
                 <div key={category.id} className="group relative h-full">
                     {/* Sketchy Card Design */}
                     <div className={`
-                        relative p-8 border-2 border-ink transition-all duration-300
-                        bg-white h-full
+                        relative p-6 border-2 border-ink transition-all duration-300
+                        bg-white h-full flex flex-col
                         shadow-hard
                         hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none
                         ${index % 2 === 0 ? 'rotate-1' : '-rotate-1'}
@@ -99,41 +133,42 @@ const Skills = () => {
                          {/* Tape effect */}
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow-100/80 border-l border-r border-white/50 rotate-2 opacity-80 backdrop-blur-sm z-20" style={{boxShadow: '0 1px 2px rgba(0,0,0,0.1)'}}></div>
 
-                        <div className="flex flex-col gap-6 relative z-10 h-full">
+                        <div className="flex flex-col gap-4 relative z-10 h-full">
                             
                             {/* Header Section */}
-                            <div className="flex items-start gap-6 border-b-2 border-ink/10 pb-6">
-                                <span className="text-5xl p-4 bg-paper border-2 border-ink rounded-full shadow-hard-sm flex-shrink-0">
+                            <div className="flex items-center gap-4 border-b-2 border-ink/10 pb-4">
+                                <span className="text-3xl p-3 bg-paper border-2 border-ink rounded-full shadow-hard-sm flex-shrink-0 text-ink">
                                     {category.icon}
                                 </span>
                                 <div>
-                                    <h3 className={`text-3xl font-bold font-heading tracking-tight text-ink`}>
+                                    <h3 className={`text-2xl font-bold font-heading tracking-tight text-ink`}>
                                         {category.title}
                                     </h3>
-                                    <p className="text-ink/70 font-sans text-lg leading-snug mt-2">
-                                        {category.description}
-                                    </p>
                                 </div>
                             </div>
+                            
+                            <p className="text-ink/70 font-sans text-sm leading-snug">
+                                {category.description}
+                            </p>
 
                             {/* Skills Grid - now comfortably wrapping */}
-                            <div className="flex flex-wrap gap-3 mt-auto">
+                            <div className="flex flex-wrap gap-2 mt-auto pt-4">
                                 {category.skills.map((skill, idx) => (
                                     <div 
                                         key={idx} 
                                         className="
-                                            group/skill flex items-center gap-3 px-4 py-2 
+                                            group/skill flex items-center gap-2 px-3 py-1.5 
                                             bg-paper border-2 border-ink 
-                                            rounded-lg transition-all duration-300
-                                            hover:bg-accent hover:scale-110 hover:-rotate-2
+                                            rounded-md transition-all duration-300
+                                            hover:bg-accent hover:scale-105 hover:-rotate-2
                                             shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
                                             cursor-default
                                         "
                                     >
-                                        <span className="text-xl text-ink group-hover/skill:animate-bounce">
+                                        <span className="text-lg text-ink group-hover/skill:animate-bounce">
                                             {skill.icon}
                                         </span>
-                                        <span className="font-bold text-ink text-base font-heading">
+                                        <span className="font-bold text-ink text-sm font-heading">
                                             {skill.name}
                                         </span>
                                     </div>

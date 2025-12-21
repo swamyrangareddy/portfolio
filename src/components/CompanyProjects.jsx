@@ -14,7 +14,7 @@ const projects = [
     category: "Data Science",
     problem: "Clients struggled to interpret raw CSV/Excel data for business decisions.",
     solution: "Built interactive Streamlit dashboards converting raw data into actionable KPIs and charts.",
-    stack: ["Python", "Streamlit", "Pandas", "Plotly"],
+    stack: ["Python", "Streamlit", "Pandas", "Plotly", "Pandas", "Numpy", "AWS", "S3", "Ec2 instance"],
     impact: "Enabled data-driven decisions for non-technical stakeholders.",
     bgCol: "bg-cyan-50",
     color: "from-blue-500 to-cyan-400",
@@ -26,31 +26,20 @@ const projects = [
     category: "Full Stack AI",
     problem: "HR teams spent hours manually screening resumes.",
     solution: "Developed an automated resume parser & scorer using Gemini API & Sentence Transformers.",
-    stack: ["React", "Flask", "MongoDB", "Gemini API", "BERT"],
+    stack: ["React", "Flask", "MongoDB", "Gemini API", "Sentence Transformers", "Python", "Matrial UI", "AWS", "S3", "Ec2 instance","Axios", "JWT"],
     impact: "Reduced screening time by 70% with semantic search capabilities.",
     bgCol: "bg-purple-50",
     color: "from-violet-500 to-purple-400",
     milestone: "The Trailhead"
   },
+  
   {
     id: 3,
-    title: "Healthcare Management Platform",
-    category: "Full Stack Web",
-    problem: "Inefficient manual appointment booking and report delivery.",
-    solution: "Creating a role-based dashboard for medical booking, reports, and lab management.",
-    stack: ["React", "Express", "PostgreSQL", "Tailwind"],
-    impact: "Streamlining operations for doctors and patients (In Progress).",
-    bgCol: "bg-green-50",
-    color: "from-emerald-500 to-teal-400",
-    milestone: "The Deep Woods"
-  },
-  {
-    id: 4,
     title: "Einsteinium Labs Website",
     category: "Web Development",
     problem: "Needed a professional corporate presence with lead generation.",
     solution: "Responsive corporate site with Google Sheets integration for zero-cost backend.",
-    stack: ["React", "Tailwind", "Google Sheets API"],
+    stack: ["React", "Tailwind", "Google Sheets API", "EmailJS",],
     impact: "Established digital presence and automated lead collection.",
     url: "https://www.einsteiniumlabs.com/",
     bgCol: "bg-orange-50",
@@ -58,17 +47,29 @@ const projects = [
     milestone: "The Rocky Ridge"
   },
   {
-    id: 5,
+    id: 4,
     title: "X-Ray Weapon Detection",
     category: "Computer Vision",
     problem: "Security bottlenecks in manual baggage screening.",
     solution: "Trained YOLOv8 model to detect guns and knives in X-ray imagery.",
-    stack: ["YOLOv8", "Python", "OpenCV", "PyTorch"],
+    stack: ["YOLOv8", "Python", "OpenCV", "PyTorch", "Streamit"],
     impact: "Enhanced security throughput with automated threat detection.",
     bgCol: "bg-red-50",
     color: "from-red-500 to-rose-400",
     milestone: "The Summit"
-  }
+  },
+  {
+    id: 5,
+    title: "Healthcare Management   Platform",
+    category: "Full Stack Web",
+    problem: "Inefficient manual appointment booking and report delivery. patient report tracking.",
+    solution: "Creating a role-based dashboard for medical booking, reports, and lab management.",
+    stack: ["React", "Express", "SQlite", "Tailwind", "JWT"],
+    impact: "Streamlining operations for doctors and patients (In Progress).",
+    bgCol: "bg-green-50",
+    color: "from-emerald-500 to-teal-400",
+    milestone: "The Deep Woods"
+  },
 ];
 
 const CompanyProjects = () => {
@@ -88,12 +89,15 @@ const CompanyProjects = () => {
         scrollTrigger: {
           trigger: triggerRef.current,
           start: "top top",
-          end: "2000 top",
-          scrub: 0.6,
+          end: "+=3000",
+          scrub: 1,
           pin: true,
+          anticipatePin: 1,
         },
       }
     );
+
+    ScrollTrigger.refresh();
 
     return () => {
       pin.kill();
@@ -101,8 +105,8 @@ const CompanyProjects = () => {
   }, []);
 
   return (
-    <section id="company-projects" className="overflow-hidden bg-paper">
-      <div ref={triggerRef}>
+    <section id="company-projects" className="bg-paper relative z-10">
+      <div ref={triggerRef} className="h-screen w-full overflow-hidden">
         <div ref={sectionRef} className="flex h-screen w-[500vw]">
           {projects.map((project, index) => (
             <div 

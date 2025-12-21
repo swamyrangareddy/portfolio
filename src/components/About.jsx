@@ -96,7 +96,7 @@ const About = () => {
                         {/* Tape */}
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-yellow-100/90 rotate-2 border-l border-r border-white/50 backdrop-blur-sm shadow-sm"></div>
                         <h3 className="text-2xl font-bold font-heading text-ink mb-2">Data Science Roots</h3>
-                        <p className="text-ink/70 font-bold font-mono text-sm">CSV Analysis • Visualization • Python Streamlit</p>
+                        <p className="text-ink/70 font-bold font-mono text-sm">CSV Analysis • Visualization • Python & Streamlit</p>
                     </div>
                 </div>
 
@@ -114,7 +114,7 @@ const About = () => {
                         {/* Tape */}
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-yellow-100/90 rotate-3 border-l border-r border-white/50 backdrop-blur-sm shadow-sm"></div>
                         <h3 className="text-2xl font-bold font-heading text-ink mb-2">Full Stack Engineering</h3>
-                        <p className="text-ink/70 font-bold font-mono text-sm">ReactJS • Node/Flask • MongoDB</p>
+                        <p className="text-ink/70 font-bold font-mono text-sm">ReactJS • Flask (REST APIs) • MongoDB</p>
                     </div>
                 </div>
             </div>

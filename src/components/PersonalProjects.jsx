@@ -5,7 +5,7 @@ const projects = [
   {
     title: "Village Festival Sharing App",
     description: "A community-driven app for sharing village festival event details, expenses, and image galleries.",
-    stack: ["React", "Firebase", "Gallery"],
+    stack: ["React.js", "Supabase", "PostgreSQL","Gallery", "Charts", "Tables", "Multi-tenant Architecture"],
     url: "https://kpl-festivals.vercel.app/",
     tags: "Community App",
     img: "https://placehold.co/600x400/1e293b/FFFFFF/png?text=Festival+App+UI" 
@@ -13,8 +13,8 @@ const projects = [
   {
     title: "ShopSync – Multi-tenant Business App",
     description: "Inventory and worker management SaaS for small businesses. Features dashboards, graphs, and multi-tenant architecture.",
-    stack: ["React", "Node.js", "MongoDB", "Charts.js"],
-    url: "https://shopsync-five.vercel.app/",
+    stack: ["React.js", "Supabase", "PostgreSQL","Charts", "Tables", "Expense Tracking", "WhatsApp Sharing", "Invoice Generation", "Multi-tenant Architecture", ],
+    url: "https://shopsync-three.vercel.app/",
     tags: "SaaS Product",
     img: "https://placehold.co/600x400/3b82f6/FFFFFF/png?text=ShopSync+Dashboard"
   }
