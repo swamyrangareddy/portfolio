@@ -6,6 +6,7 @@ import CompanyProjects from './components/CompanyProjects';
 import PersonalProjects from './components/PersonalProjects';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
+import Passport from './components/Passport';
 import Contact from './components/Contact';
 import SectionWrapper from './components/SectionWrapper';
 // import Passport from './components/Passport';
@@ -14,8 +15,26 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+import CustomCursor from './components/CustomCursor';
+import DoodleCanvas from './components/DoodleCanvas';
+import TrailMap from './components/TrailMap';
+
 function App() {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
+
+  // Audio assets (using creative commons placeholder logic or base64 if needed)
+  // For now, we'll implement the logic to play sounds on hover/scroll
+  const playSound = (type) => {
+    // We can use a small sound pool for "rustle"
+    const audio = new Audio(`https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3`); // Short paper rustle
+    audio.volume = 0.1;
+    audio.play().catch(() => {}); // Catch browser autoplay blocks
+  };
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+    playSound('rustle');
+  };
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -23,63 +42,51 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    // Global refresh for ScrollTrigger to handle dynamic layouts
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1500);
+
+    return () => clearTimeout(timer);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
-  // Custom Cursor Logic
-  useEffect(() => {
-    const cursor = document.getElementById('custom-cursor');
-    const follower = document.getElementById('cursor-follower');
-    
-    const moveCursor = (e) => {
-      gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
-      gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.3 });
-    };
-
-    window.addEventListener('mousemove', moveCursor);
-    return () => window.removeEventListener('mousemove', moveCursor);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-dark-bg text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden cursor-none">
-       {/* Custom Cursor Elements */}
-       <div id="custom-cursor" className="fixed top-0 left-0 w-4 h-4 bg-ink rounded-full pointer-events-none z-[100] -translate-x-1/2 -translate-y-1/2 mix-blend-difference"></div>
-       <div id="cursor-follower" className="fixed top-0 left-0 w-8 h-8 border-2 border-ink rounded-full pointer-events-none z-[99] -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out opacity-50"></div>
+    <div className="min-h-screen text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
+       <CustomCursor playSound={playSound} />
+       <DoodleCanvas />
+       <TrailMap playSound={playSound} />
 
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Navbar theme={theme} toggleTheme={toggleTheme} playSound={playSound} />
       
       <main className="w-full">
-        <Hero />
+        <Hero id="hero" />
         
-        <SectionWrapper id="about">
-          <About />
-        </SectionWrapper>
+        <Experience id="experience" />
 
-        {/* <SectionWrapper id="summary">
-            <Passport />
-        </SectionWrapper> */}
+        <Passport id="summary" />
+
+        <Skills id="skills" />
         
-        <CompanyProjects />
+        <CompanyProjects id="company-projects" />
         
-        <SectionWrapper id="personal-projects">
-           <PersonalProjects />
-        </SectionWrapper>
+        <PersonalProjects id="personal-projects" />
+
+        <About id="about" />
         
-        <SectionWrapper id="skills">
-          <Skills />
-        </SectionWrapper>
-        
-        <SectionWrapper id="experience">
-          <Experience />
-        </SectionWrapper>
-        
-        <SectionWrapper id="contact">
-          <Contact />
-        </SectionWrapper>
+        <Contact id="contact" />
       </main>
+
+      <svg style={{ position: 'absolute', width: 0, height: 0 }} aria-hidden="true" focusable="false">
+        <filter id="watercolor-filter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+        </filter>
+        <filter id="watercolor-filter-v2">
+          <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="4" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" />
+        </filter>
+      </svg>
     </div>
   );
 }

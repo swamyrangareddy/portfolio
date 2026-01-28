@@ -1,125 +1,169 @@
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FaGlobeAmericas, FaPassport, FaStamp, FaCode, FaCoffee } from 'react-icons/fa';
-import { SiReact, SiPython, SiTensorflow } from 'react-icons/si';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import gsap from 'gsap';
+import magicBus from '../assets/magic_bus.png';
 
-gsap.registerPlugin(ScrollTrigger);
+const pages = [
+  {
+    title: "The Traveler",
+    type: "Personal ID",
+    content: (
+      <div className="space-y-4">
+        <div className="w-32 h-32 bg-ink/5 watercolor-border mx-auto flex items-center justify-center overflow-hidden">
+             <img src={magicBus} alt="Profile" className="w-24 opacity-50 grayscale" />
+        </div>
+        <div className="text-center space-y-1">
+          <p className="text-xs font-heading font-black opacity-40 uppercase">Surname / Nom</p>
+          <p className="text-xl font-heading font-bold">MUTHUMULA</p>
+          <p className="text-xs font-heading font-black opacity-40 uppercase mt-2">Given Names / Prénoms</p>
+          <p className="text-xl font-heading font-bold">SWAMYRANGAREDDY</p>
+        </div>
+        <div className="grid grid-cols-2 gap-4 pt-4 text-center border-t border-ink/5">
+             <div>
+                <p className="text-[10px] font-heading font-black opacity-40 uppercase">Nationality</p>
+                <p className="font-bold">Indian</p>
+             </div>
+             <div>
+                <p className="text-[10px] font-heading font-black opacity-40 uppercase">Specialty</p>
+                <p className="font-bold text-wc-blue">AI/ML</p>
+             </div>
+        </div>
+      </div>
+    )
+  },
+  {
+    title: "Visa: Data Analytics",
+    type: "Entry Permit",
+    content: (
+      <div className="relative h-full flex flex-col justify-center">
+        <div className="absolute -top-4 -right-4 w-24 h-24 border-4 border-wc-teal/30 rounded-full flex items-center justify-center -rotate-12">
+            <span className="text-wc-teal font-black text-xs text-center leading-tight">ENTRY<br/>GRANTED<br/>2021</span>
+        </div>
+        <div className="space-y-4">
+             <h4 className="text-xl md:text-2xl font-heading font-black text-ink/80">The Foundation</h4>
+             <p className="text-base text-ink/60 font-sans italic">"Mapping thousands of data points into actionable insights. Mastered the art of visualization and structural analysis."</p>
+             <ul className="text-sm space-y-2 font-bold text-ink/70">
+                <li>• Python / Pandas Mastery</li>
+                <li>• SQL Deep Diving</li>
+                <li>• Tableau Dashboarding</li>
+             </ul>
+        </div>
+      </div>
+    )
+  },
+  {
+    title: "Visa: Deep Learning",
+    type: "Advanced Access",
+    content: (
+      <div className="relative h-full flex flex-col justify-center">
+         <div className="absolute -bottom-4 -left-4 w-24 h-24 border-4 border-wc-rose/30 flex items-center justify-center rotate-12">
+            <span className="text-wc-rose font-black text-xs text-center leading-tight">BRAIN<br/>MAPPED<br/>2023</span>
+        </div>
+        <div className="space-y-4">
+             <h4 className="text-xl md:text-2xl font-heading font-black text-ink/80">Neural Frontiers</h4>
+             <p className="text-base text-ink/60 font-sans italic">"Detecting anomalies in the invisible. Built systems that see what the human eye misses."</p>
+             <ul className="text-sm space-y-2 font-bold text-ink/70">
+                <li>• Computer Vision / CNNs</li>
+                <li>• Gemini / LLM Integration</li>
+                <li>• PyTorch Workflows</li>
+             </ul>
+        </div>
+      </div>
+    )
+  }
+];
 
-const Passport = () => {
-  const containerRef = useRef(null);
-  const passportRef = useRef(null);
+const Passport = ({ id }) => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [direction, setDirection] = useState(0);
 
-  useEffect(() => {
-    const el = passportRef.current;
-    
-    gsap.fromTo(el,
-      { rotationY: -15, rotationX: 10, scale: 0.9, opacity: 0 },
-      {
-        rotationY: 0,
-        rotationX: 0,
-        scale: 1,
-        opacity: 1,
-        duration: 1.5,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 75%",
-        }
-      }
-    );
-  }, []);
+  const nextPage = () => {
+    if (currentPage < pages.length - 1) {
+      setDirection(1);
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setDirection(-1);
+      setCurrentPage(prev => prev - 1);
+    }
+  };
 
   return (
-    <div ref={containerRef} className="py-20 bg-paper relative overflow-hidden flex justify-center items-center perspective-1000">
-      {/* Background World Map Texture */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-         <FaGlobeAmericas className="w-full h-full text-ink animate-spin-slow" style={{animationDuration: '60s'}} />
+    <div id={id} className="relative py-20 flex flex-col items-center">
+      <div className="mb-6 text-center">
+         <h2 className="text-3xl md:text-4xl font-heading font-black text-ink mb-1">Technical Passport</h2>
+         <p className="text-base text-ink/60 font-sans font-bold">A journey through technologies and milestones</p>
       </div>
 
-      <div ref={passportRef} className="relative w-full max-w-4xl mx-4 bg-[#f4e4bc] border-2 border-[#8b5a2b] rounded-lg shadow-[10px_10px_20px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col md:flex-row" style={{backgroundImage: 'repeating-linear-gradient(#f4e4bc 0px, #f4e4bc 24px, #e8dcb5 25px)'}}>
+      <div className="relative w-full max-w-4xl aspect-[4/3] md:aspect-[16/9] flex items-center justify-center">
+        {/* Passport Cover / Base */}
+        <div className="absolute inset-0 bg-ink/5 watercolor-border rounded-[2rem] -z-10 shadow-2xl skew-x-1"></div>
         
-        {/* Left Page (Identity) */}
-        <div className="w-full md:w-1/2 p-8 border-b-2 md:border-b-0 md:border-r-2 border-[#8b5a2b]/30 relative flex flex-col items-center text-center">
-            {/* Photo Area */}
-            <div className="w-32 h-40 bg-gray-200 border-4 border-white shadow-md rotate-[-2deg] mb-6 relative overflow-hidden">
-                <img src="https://placehold.co/400x500/18181b/ffffff/png?text=Explorer" alt="Profile" className="w-full h-full object-cover grayscale contrast-125" />
-                {/* Stamp over photo */}
-                <div className="absolute -bottom-4 -right-4 w-16 h-16 border-4 border-red-500/50 rounded-full flex items-center justify-center rotate-[-20deg]">
-                    <span className="text-red-500/50 text-[10px] font-bold uppercase">Authorized</span>
-                </div>
-            </div>
+        <div className="w-full h-full grid grid-cols-2 bg-white/60 backdrop-blur-md rounded-[1.5rem] overflow-hidden shadow-2xl border-4 border-ink/10 perspective-1000">
+             
+             {/* Left Page (Static Backdrop) */}
+             <div className="relative p-8 md:p-12 border-r-2 border-ink/5 flex flex-col bg-[#fdfaf6]">
+                  <div className="absolute top-4 left-6 text-[8px] font-black opacity-30 select-none">OFFICIAL TRAVEL DOCUMENT</div>
+                  <div className="h-full flex flex-col">
+                      <div className="flex justify-between items-start mb-10">
+                           <span className="text-3xl">🇮🇳</span>
+                           <div className="text-right">
+                               <p className="font-heading font-black text-xl">PASSPORT</p>
+                               <p className="text-[10px] font-black opacity-40">REPUPLIC OF INDIA</p>
+                           </div>
+                      </div>
+                      
+                      {/* Left Page Changes based on context (Fixed for now) */}
+                      <div className="mt-autop-6 bg-wc-blue/5 watercolor-border rotate-1">
+                           <p className="text-xs font-bold leading-relaxed opacity-60">"The bearer of this passport is authorized to map unknown territories of technology and deploy AI models in the wild."</p>
+                      </div>
+                  </div>
+             </div>
 
-            <h3 className="font-heading text-3xl font-bold text-[#8b5a2b] uppercase tracking-widest mb-1">Swamyrangareddy</h3>
-            <p className="font-sans text-ink/60 text-sm uppercase tracking-widest mb-6">Full Stack AI Developer</p>
+             {/* Right Page (The Animated Active Page) */}
+             <div className="relative p-8 md:p-12 overflow-hidden bg-[#faf7f2]">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={currentPage}
+                        initial={{ rotateY: direction > 0 ? 90 : -90, opacity: 0 }}
+                        animate={{ rotateY: 0, opacity: 1 }}
+                        exit={{ rotateY: direction > 0 ? -90 : 90, opacity: 0 }}
+                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                        className="w-full h-full"
+                    >
+                        <div className="flex justify-between items-start mb-6">
+                            <span className="text-[10px] font-black opacity-40 uppercase tracking-widest">{pages[currentPage].type}</span>
+                            <span className="text-2xl font-heading font-black text-wc-blue/20">P-{currentPage + 1}</span>
+                        </div>
+                        
+                        <div className="h-full">
+                            {pages[currentPage].content}
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
 
-            <div className="w-full text-left space-y-2 font-mono text-sm text-ink/80">
-                <div className="flex justify-between border-b border-[#8b5a2b]/20 pb-1">
-                    <span>Nationality:</span>
-                    <span className="font-bold">Digital Nomad</span>
+                {/* Navigation Buttons */}
+                <div className="absolute bottom-6 right-8 flex gap-4">
+                    <button 
+                         onClick={prevPage}
+                         disabled={currentPage === 0}
+                         className="w-10 h-10 flex items-center justify-center bg-white border-2 border-ink/10 shadow-lg rounded-full disabled:opacity-30 hover:bg-wc-rose hover:text-white transition-all transform hover:-rotate-12"
+                    >
+                        &larr;
+                    </button>
+                    <button 
+                         onClick={nextPage}
+                         disabled={currentPage === pages.length - 1}
+                         className="w-10 h-10 flex items-center justify-center bg-white border-2 border-ink/10 shadow-lg rounded-full disabled:opacity-30 hover:bg-wc-blue hover:text-white transition-all transform hover:rotate-12"
+                    >
+                        &rarr;
+                    </button>
                 </div>
-                <div className="flex justify-between border-b border-[#8b5a2b]/20 pb-1">
-                    <span>DOB:</span>
-                    <span className="font-bold">Est. 2023</span>
-                </div>
-                <div className="flex justify-between border-b border-[#8b5a2b]/20 pb-1">
-                    <span>Code:</span>
-                    <span className="font-bold">JS / PY / AI</span>
-                </div>
-                <div className="flex justify-between border-b border-[#8b5a2b]/20 pb-1">
-                    <span>Issued By:</span>
-                    <span className="font-bold">Muthumula HQ</span>
-                </div>
-            </div>
-            
-             {/* Signature */}
-            <div className="mt-8 font-heading text-2xl text-ink/70 -rotate-2">
-                Swamy R. Muthumula
-            </div>
+             </div>
         </div>
-
-        {/* Right Page (Stamps & Stats) */}
-        <div className="w-full md:w-1/2 p-8 relative overflow-hidden bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.5)_0%,transparent_100%)]">
-            <h4 className="font-heading text-xl text-[#8b5a2b]/50 uppercase tracking-widest text-center mb-8 border-b border-[#8b5a2b]/20 pb-2">Expedition Visas</h4>
-
-            <div className="grid grid-cols-2 gap-6">
-                {/* Stamp 1 */}
-                <div className="group relative w-24 h-24 border-4 border-green-600/60 rounded-full flex flex-col items-center justify-center p-2 rotate-12 hover:scale-110 transition-transform cursor-default">
-                    <FaStamp className="text-green-600/40 text-2xl mb-1" />
-                    <span className="text-green-600/80 font-bold text-xs uppercase text-center leading-tight">Project<br/>Shipped</span>
-                    <span className="absolute bottom-2 text-[8px] text-green-600/60 font-mono">APPROVED</span>
-                </div>
-
-                {/* Stamp 2 */}
-                <div className="group relative w-28 h-20 border-4 border-blue-600/50 rounded-lg flex flex-col items-center justify-center p-2 -rotate-6 hover:scale-110 transition-transform cursor-default ml-auto">
-                    <FaCode className="text-blue-600/40 text-2xl mb-1" />
-                    <span className="text-blue-600/80 font-bold text-xs uppercase text-center leading-tight">Full Stack<br/>Cleared</span>
-                </div>
-
-                {/* Stamp 3 */}
-                <div className="group relative w-24 h-24 border-double border-4 border-red-500/60 rounded-full flex flex-col items-center justify-center p-2 rotate-[-10deg] hover:scale-110 transition-transform cursor-default mt-4">
-                    <SiReact className="text-red-500/40 text-3xl" />
-                    <span className="text-red-500/60 font-bold text-[10px] uppercase mt-1">Class A</span>
-                </div>
-
-                 {/* Stamp 4 */}
-                 <div className="group relative w-28 h-20 border-dashed border-2 border-purple-600/60 rounded flex flex-col items-center justify-center p-2 rotate-3 hover:scale-110 transition-transform cursor-default mt-2">
-                    <div className="flex gap-2">
-                        <SiPython className="text-purple-600/40 text-xl" />
-                        <SiTensorflow className="text-purple-600/40 text-xl" />
-                    </div>
-                    <span className="text-purple-600/80 font-bold text-xs uppercase text-center leading-tight mt-1">AI/ML<br/>Certified</span>
-                </div>
-            </div>
-
-            {/* Fun Stat Stamp */}
-            <div className="absolute bottom-4 right-4 text-[#8b5a2b]/40 rotate-[-15deg]">
-                <div className="flex items-center gap-1 font-heading text-sm">
-                    <FaCoffee /> Infinite Refills
-                </div>
-            </div>
-        </div>
-
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { SiLinkedin, SiGithub, SiGmail } from 'react-icons/si';
 gsap.registerPlugin(ScrollTrigger);
 import contactIll from '../assets/contact_ill.png';
 
-const Contact = () => {
+const Contact = ({ id }) => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
 
@@ -26,67 +26,72 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className="py-20 bg-paper transition-colors duration-300 relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-ink opacity-10 rotate-1"></div>
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1 bg-ink opacity-10 -rotate-1"></div>
+    <div id={id} className="py-20 transition-colors duration-300 relative overflow-hidden">
+        {/* Background Watercolor Splashes - Enhanced atmosphere */}
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-wc-violet rounded-full watercolor-splash opacity-20 pointer-events-none"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-wc-rose rounded-full watercolor-splash opacity-15 pointer-events-none"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div ref={contentRef} className="max-w-2xl mx-auto p-8 border-2 border-ink bg-white shadow-hard rotate-1 relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-black rounded-full border-2 border-white z-20"></div>
+        <div ref={contentRef} className="max-w-2xl mx-auto p-12 border-2 border-ink/5 bg-white/90 backdrop-blur-sm shadow-2xl rotate-1 relative watercolor-border wc-paper-stack rounded-2xl">
+            {/* Thumbtack / Pin */}
+            <div className={`absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full z-20 shadow-lg watercolor-border bg-wc-teal`}>
+                <div className="absolute inset-1.5 border-2 border-white/30 rounded-full"></div>
+            </div>
             
-            {/* Mail Illustration */}
-            <div className="absolute -top-24 -right-12 w-40 h-40 hidden md:block transform rotate-12 hover:scale-110 transition-transform">
-               <img src={contactIll} alt="Send Mail" className="w-full h-full object-contain filter drop-shadow-[4px_4px_0px_rgba(24,24,27,1)]" />
+            {/* Mail Illustration - Watercolor Style */}
+            <div className="absolute -top-24 -right-12 w-40 h-40 hidden md:block transform rotate-12 hover:scale-110 transition-transform grayscale opacity-40">
+               <img src={contactIll} alt="Send Mail" className="w-full h-full object-contain filter drop-shadow-[4px_4px_10px_rgba(0,0,0,0.1)]" />
             </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-6 tracking-tight text-ink transform -rotate-2">
-            Let's <span className="text-white bg-secondary px-2 border-2 border-ink shadow-hard-sm transform rotate-2 inline-block">Connect</span>
+          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-6 tracking-tight text-ink transform -rotate-2">
+            Let's <span className="relative inline-block">
+                <span className="relative z-10 text-wc-blue px-3 py-1">Connect</span>
+                <span className="absolute inset-0 bg-wc-teal/80 wc-wobbly-bg rotate-2 scale-110"></span>
+            </span>
           </h2>
           
-          <p className="text-xl md:text-2xl text-ink/80 mb-10 font-sans max-w-lg mx-auto leading-relaxed border-l-4 border-ink pl-6 italic">
+          <p className="text-lg md:text-xl text-ink mb-10 font-sans max-w-md mx-auto leading-relaxed border-l-4 border-wc-yellow/60 pl-6 font-medium">
             "I'm always looking for new opportunities and interesting projects to work on."
           </p>
-
-          {/* Decorative Quote Stamp */}
-          <div className="hidden lg:block absolute -bottom-10 -left-20 w-56 p-4 bg-white border-2 border-ink shadow-hard transform rotate-6 z-20" style={{backgroundImage: 'repeating-linear-gradient(#f0f0f0 0px, #f0f0f0 24px, #e5e5e5 25px)'}}>
-               <div className="w-8 h-8 bg-red-100 rounded-full border-2 border-ink mx-auto mb-2 opacity-50"></div>
-              <p className="font-heading text-ink text-center text-lg leading-tight">
-                  "Happiness Only Real When Shared"
-              </p>
-          </div>
 
           <div className="flex justify-center gap-8 mb-16">
             <a 
               href="https://www.linkedin.com/in/swamyrangareddy" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-4 bg-white border-2 border-ink rounded-full shadow-hard hover:shadow-none hover:bg-blue-100 hover:translate-x-[2px] hover:translate-y-[2px] transition-all group"
+              className="p-5 bg-wc-blue/80 border-2 border-ink/5 rounded-full shadow-lg hover:scale-110 hover:bg-wc-white hover:text-black transition-all group watercolor-border"
               aria-label="LinkedIn"
             >
-              <SiLinkedin className="w-8 h-8 text-ink group-hover:scale-110 transition-transform" />
+               <SiLinkedin className="w-8 h-8 text-black group-hover:text-white transition-colors" />
             </a>
             <a 
               href="mailto:swamyrangareddy@example.com" 
-              className="p-4 bg-white border-2 border-ink rounded-full shadow-hard hover:shadow-none hover:bg-red-100 hover:translate-x-[2px] hover:translate-y-[2px] transition-all group"
+              className="p-5 bg-wc-rose/80 border-2 border-ink/5 rounded-full shadow-lg hover:scale-110 hover:bg-wc-white hover:text-black transition-all group watercolor-border"
               aria-label="Email"
             >
-              <SiGmail className="w-8 h-8 text-ink group-hover:scale-110 transition-transform" />
+               <SiGmail className="w-8 h-8 text-black group-hover:text-white transition-colors" />
             </a>
             <a 
               href="https://github.com/swamyrangareddy" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-4 bg-white border-2 border-ink rounded-full shadow-hard hover:shadow-none hover:bg-slate-200 hover:translate-x-[2px] hover:translate-y-[2px] transition-all group"
+              className="p-5 bg-wc-yellow/80 border-2 border-ink/5 rounded-full shadow-lg hover:scale-110 hover:bg-wc-white hover:text-black transition-all group watercolor-border"
               aria-label="GitHub"
             >
-              <SiGithub className="w-8 h-8 text-ink group-hover:scale-110 transition-transform" />
+               <SiGithub className="w-8 h-8 text-black group-hover:text-white transition-colors" />
             </a>
           </div>
+           {/* Decorative Quote Stamp - Post-it Style */}
+          <div className="hidden lg:block absolute -bottom-10 -left-16 w-56 p-4 bg-wc-yellow/20 border-2 border-ink/5 shadow-xl transform rotate-6 z-20 wc-wobbly-bg rounded-lg backdrop-blur-sm">
+               <div className="w-8 h-8 bg-wc-rose/20 rounded-full border-2 border-transparent watercolor-border mx-auto mb-3 opacity-50"></div>
+              <p className="font-heading text-ink text-center text-lg leading-tight font-bold">
+                  "Happiness Only Real When Shared"
+              </p>
+          </div>
 
-          <footer className="pt-8 border-t-2 border-ink border-dashed text-ink/60 text-sm font-bold font-sans">
+          <footer className="pt-8 border-t-2 border-ink/5 border-dashed text-ink/40 text-sm font-bold font-sans">
             <p>&copy; {new Date().getFullYear()} Swamyrangareddy Muthumula.</p>
-            <p className="mt-2 text-xs">Hand Coded with &hearts; using React & Tailwind</p>
+            <p className="mt-2 text-xs font-bold">Hand Coded with &hearts; using React & Tailwind</p>
           </footer>
         </div>
       </div>

@@ -4,7 +4,7 @@ import SplitText from './SplitText';
 import magicBus from '../assets/magic_bus.png';
 
 
-const Hero = () => {
+const Hero = ({ id }) => {
   const heroRef = useRef(null);
   const textRef = useRef(null);
   const subRef = useRef(null);
@@ -86,68 +86,76 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      id="hero" 
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-paper"
+      id={id}
+      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
     >
-      {/* Background Elements - Doodles */}
+      {/* Background Elements - Watercolor Splashes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-         {/* Dot Grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(#18181b_1px,transparent_1px)] bg-[size:20px_20px] opacity-10"></div>
+        {/* Subtle Paper Texture Overflow (optional, already in body) */}
         
-        {/* Abstract Doodle Shapes */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary-light/30 rounded-full border-2 border-ink animate-pulse" style={{borderRadius: '63% 37% 39% 61% / 44% 56% 44% 56%'}}></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-secondary-light/30 border-2 border-ink" style={{borderRadius: '41% 59% 41% 59% / 54% 38% 62% 46%'}}></div>
+        {/* Watercolor Splashes */}
+        <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-wc-blue rounded-full watercolor-splash opacity-20"></div>
+        <div className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-wc-rose rounded-full watercolor-splash opacity-15"></div>
+        <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-wc-blue rounded-full watercolor-splash opacity-40"></div>
+        <div className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-wc-rose rounded-full watercolor-splash opacity-30"></div>
+        <div className="absolute bottom-[-5%] left-[10%] w-[30%] h-[30%] bg-wc-teal rounded-full watercolor-splash opacity-40"></div>
+        <div className="absolute bottom-[15%] right-[20%] w-[25%] h-[25%] bg-wc-yellow rounded-full watercolor-splash opacity-20"></div>
       </div>
 
-      {/* Background Elements - Doodles */}
-      <div className="container  mx-auto px-4 z-10 text-center relative">
-        <div ref={textRef} className="mb-8 relative inline-block">
-          {/* Highlighter effect behind title */}
-          <div className="absolute -inset-2 bg-accent/40 w-full  transform -rotate-1 skew-x-3 rounded-lg -z-10 border-2 border-ink"></div>
+      {/* Hero Content */}
+      <div className="container mx-auto px-4 z-10 text-center relative">
+        <div ref={textRef} className="mb-10 relative inline-block">
+          {/* Watercolor Brush Stroke behind title */}
+          <div className="absolute -inset-10 bg-wc-yellow/20 w-full h-full transform -rotate-2 -z-10 blur-3xl"></div>
           
-          <p className="text-xl md:text-2xl font-handwriting text-ink/80 mb-4 transform -rotate-2" style={{fontFamily: 'cursive'}}>
-            Hi there! I'm <span className="font-bold text-primary-dark underline decoration-wavy">Swamyrangareddy Muthumula</span>
+          <p className="text-lg md:text-xl font-heading text-ink mb-4 transform -rotate-1 font-medium">
+            Hi there! I'm <span className="relative inline-block px-1">
+                <span className="relative z-10 font-bold">Swamyrangareddy Muthumula</span>
+                <span className="absolute inset-y-1 -inset-x-2 wc-highlight-rose opacity-40 -rotate-1 rounded-sm"></span>
+            </span>
           </p>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight text-ink transform -rotate-2">
-            <span className="block mb-2">I build</span> 
-            <span className="text-primary-dark underline decoration-wavy decoration-2 inline-block">
-                <SplitText>AI Products</SplitText>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold tracking-tight text-ink leading-tight">
+            <span className="block">I build</span> 
+            <span className="relative inline-block mt-2">
+                <span className="relative z-10 italic"><SplitText>AI Products</SplitText></span>
+                <span className="absolute inset-x-0 bottom-2 h-4 md:h-8 bg-wc-blue opacity-30 -rotate-2 watercolor-border-varied"></span>
             </span>
           </h1>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold tracking-tight text-ink mt-4 transform rotate-1">
-             that make an <span className="bg-secondary px-2 border-2 border-ink text-white inline-block transform -rotate-2 shadow-hard-sm">
-                <SplitText delay={0.5}>Impact!</SplitText>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-ink mt-6 transform rotate-1">
+             that make an <span className="relative inline-block">
+                <span className="relative z-10 text-white px-4 py-1"><SplitText delay={0.5}>Impact!</SplitText></span>
+                <span className="absolute inset-0 bg-wc-teal watercolor-border-varied -rotate-2 scale-110 shadow-2xl"></span>
              </span>
           </h1>
         </div>
 
-        <p ref={subRef} className="text-xl md:text-2xl text-ink/80 mb-12 font-sans max-w-2xl mx-auto leading-relaxed border-2 border-ink p-6 bg-white shadow-hard rotate-1 relative z-20">
-          Data Scientist | Full Stack AI Developer | Startup Builder
-        </p>
+        <div ref={subRef} className="max-w-3xl mx-auto mb-12 px-4 font-bold">
+            <p className="text-lg md:text-2xl text-ink font-sans leading-relaxed p-6 md:p-8 bg-transparent shadow-xl rotate-1 relative z-20 wc-wobbly-bg rounded-xl">
+                Data Scientist <span className="text-wc-rose mx-2">•</span> Full Stack AI Developer <span className="text-wc-teal mx-2">•</span> Startup Builder
+            </p>
+        </div>
 
-        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-8 justify-center items-center relative z-20">
+        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-20">
           <a 
             href="#company-projects"
             ref={addToButtonsRef}
-            className="group px-8 py-4 bg-primary text-white border-2 border-ink rounded-lg font-bold text-xl transition-all shadow-hard hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
+            className="group px-8 py-4 bg-white text-black border-2 border-ink watercolor-border-varied rounded-xl font-black text-xl transition-all shadow-xl hover:scale-105 hover:bg-black hover:text-white"
           >
             check_my_work()
           </a>
           <a 
-            href="/resume.pdf" 
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contact" 
             ref={addToButtonsRef}
-            className="group px-8 py-4 bg-white text-ink border-2 border-ink rounded-lg font-bold text-xl transition-all shadow-hard hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
+            className="group px-8 py-4 bg-ink text-white border-2 border-ink watercolor-border-varied rounded-xl font-black text-xl transition-all shadow-xl hover:scale-105 hover:bg-white hover:text-ink"
           >
-             Download Resume &rarr;
+             Say Hello &rarr;
           </a>
         </div>
 
         {/* Decorative Quote Stamp - Top Left */}
-        <div className="hidden lg:block absolute top-10 left-10 w-64 p-4 bg-yellow-100 border-2 border-ink shadow-hard transform -rotate-3 z-0 opacity-80 pointer-events-none sticky-note">
-            <p className="font-heading text-ink text-lg leading-tight">
+        <div className="hidden lg:block absolute top-10 left-10 w-64 p-6 bg-wc-violet/20 backdrop-blur-sm wc-wobbly-bg transform -rotate-3 z-0 opacity-100 pointer-events-none shadow-xl">
+            <p className="font-heading text-ink text-lg leading-tight font-bold">
                 "The Core of Man's Spirit comes from New Experiences"
             </p>
             <p className="text-xs font-bold text-ink/60 mt-2 text-right uppercase">- Alexander Supertramp</p>
@@ -158,13 +166,13 @@ const Hero = () => {
             <img 
                  src={magicBus} 
                  alt="Magic Bus 142" 
-                 className="w-full h-full object-contain filter drop-shadow-[4px_4px_0px_rgba(24,24,27,0.5)]"
+                 className="w-full h-full object-contain filter drop-shadow-[4px_4px_10px_rgba(0,0,0,0.2)]"
             />
         </div>
       </div>
       
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-         <span className="text-ink font-heading text-xl">Scroll Down ↓</span>
+         <span className="text-ink/60 font-heading text-xl">Scroll Down ↓</span>
       </div>
     </section>
   );

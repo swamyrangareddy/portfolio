@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { HiMenu, HiX, HiMoon, HiSun } from 'react-icons/hi';
 
-const Navbar = ({ theme, toggleTheme }) => {
+const Navbar = ({ theme, toggleTheme, playSound }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -21,10 +21,12 @@ const Navbar = ({ theme, toggleTheme }) => {
 
   const navLinks = [
     { name: 'Home', href: '#hero' },
-    { name: 'About', href: '#about' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Summary', href: '#summary' },
+    { name: 'Skills', href: '#skills' },
     { name: 'Work', href: '#company-projects' },
     { name: 'Side Projects', href: '#personal-projects' },
-    { name: 'Experience', href: '#experience' },
+    { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -35,23 +37,23 @@ const Navbar = ({ theme, toggleTheme }) => {
         : 'bg-transparent border-transparent'
     }`}>
        {/* Hiking Trail Scroll Progress - Into the Wild Colors */}
-       <div className="absolute bottom-0 left-0 h-1.5 bg-ink/10 w-full">
-           <div 
-             className="h-full bg-gradient-to-r from-cyan-600 via-teal-500 to-yellow-400 relative" 
-             style={{width: `${scrollProgress}%`}}
-           >
+      <div className="absolute bottom-0 left-0 h-2 bg-ink/5 w-full overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-wc-blue via-wc-teal to-wc-yellow watercolor-border opacity-80" 
+            style={{width: `${scrollProgress}%`}}
+          >
                {/* Hiker/Bus Icon walking the trail */}
-               <div className="absolute -right-3 -top-3.5 text-xl transform -scale-x-100 transition-all duration-500">
+               <div className="absolute -right-3 -top-3 text-xl transform -scale-x-100 transition-all duration-500">
                    {scrollProgress > 98 ? '🚌' : '🚶'}
                </div>
-           </div>
-       </div>
+          </div>
+      </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
             <a href="#" className="text-2xl font-heading font-bold tracking-tighter group flex items-center gap-1">
-              <span className="text-ink group-hover:text-primary transition-colors transform -rotate-3 inline-block border-2 border-ink bg-white px-2 py-1 shadow-hard-sm">SR</span>
+              <span className="text-ink group-hover:text-wc-blue transition-colors transform -rotate-3 inline-block watercolor-border bg-white/60 backdrop-blur-sm px-3 py-1 shadow-lg border-2 border-ink/5">SR</span>
             </a>
           </div>
           
@@ -62,13 +64,21 @@ const Navbar = ({ theme, toggleTheme }) => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-lg font-bold text-ink hover:text-primary transition-colors hover:scale-110 transform hover:-rotate-2 inline-block decoration-wavy hover:underline decoration-2"
+                  onMouseEnter={() => playSound('rustle')}
+                  className="text-lg font-bold text-ink hover:text-wc-blue transition-all hover:scale-110 transform hover:-rotate-2 inline-block relative group"
                 >
                   {link.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-1 bg-wc-blue group-hover:w-full transition-all duration-300 rounded-full"></span>
                 </a>
               ))}
-              <div className="h-6 w-0.5 bg-ink mx-4 rotate-12"></div>
-              {/* Theme Toggle Commented Out as requested */}
+              <div className="h-6 w-0.5 bg-ink/10 mx-4 rotate-12"></div>
+              <button
+                onClick={toggleTheme}
+                onMouseEnter={() => playSound('rustle')}
+                className="p-2 rounded-lg bg-white border-2 border-ink text-ink hover:bg-accent transition-all shadow-hard-sm"
+              >
+                {theme === 'dark' ? <HiSun className="w-5 h-5" /> : <HiMoon className="w-5 h-5" />}
+              </button>
             </div>
           </div>
 
@@ -92,14 +102,14 @@ const Navbar = ({ theme, toggleTheme }) => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-paper border-b-2 border-ink shadow-hard p-4 absolute w-full top-20 left-0">
+        <div className="md:hidden bg-paper/95 backdrop-blur-md border-b-2 border-ink shadow-hard p-4 absolute w-full top-20 left-0 animate-slideDown origin-top z-40">
           <div className="space-y-4">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 rounded-lg border-2 border-ink bg-white text-lg font-bold text-ink hover:bg-primary hover:text-white hover:shadow-hard-sm transition-all transform hover:-rotate-1"
+                className="block px-4 py-3 rounded-lg border-2 border-ink bg-white/80 text-lg font-bold text-ink hover:bg-primary hover:text-white hover:shadow-hard-sm transition-all transform hover:-rotate-1"
               >
                 {link.name}
               </a>

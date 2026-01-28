@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitText from './SplitText';
 import mountainsIll from '../assets/mountains.png';
 import footstepsIll from '../assets/footsteps.png';
+import TiltWrapper from './TiltWrapper';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,146 +59,222 @@ const projects = [
     color: "from-red-500 to-rose-400",
     milestone: "The Summit"
   },
-  {
-    id: 5,
-    title: "Healthcare Management   Platform",
-    category: "Full Stack Web",
-    problem: "Inefficient manual appointment booking and report delivery. patient report tracking.",
-    solution: "Creating a role-based dashboard for medical booking, reports, and lab management.",
-    stack: ["React", "Express", "SQlite", "Tailwind", "JWT"],
-    impact: "Streamlining operations for doctors and patients (In Progress).",
-    bgCol: "bg-green-50",
-    color: "from-emerald-500 to-teal-400",
-    milestone: "The Deep Woods"
-  },
 ];
 
-const CompanyProjects = () => {
+const CompanyProjects = ({ id }) => {
+  const [expandedId, setExpandedId] = useState(1);
   const sectionRef = useRef(null);
   const triggerRef = useRef(null);
 
   useEffect(() => {
-    const pin = gsap.fromTo(
-      sectionRef.current,
-      {
-        translateX: 0,
-      },
-      {
-        translateX: "-400vw", // Move by 4 widths items (total 5 items - 1 viewport)
-        ease: "none",
-        duration: 1,
-        scrollTrigger: {
-          trigger: triggerRef.current,
-          start: "top top",
-          end: "+=3000",
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
+    let ctx = gsap.context(() => {
+      ScrollTrigger.matchMedia({
+        // Desktop - Horizontal Scroll
+        "(min-width: 1024px)": function() {
+          gsap.to(
+            sectionRef.current,
+            {
+              xPercent: -100 * ((projects.length - 1) / projects.length),
+              ease: "none",
+              scrollTrigger: {
+                trigger: triggerRef.current,
+                start: "top top",
+                end: () => `+=${triggerRef.current.offsetWidth * (projects.length - 1)}`,
+                scrub: 1,
+                pin: true,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+              },
+            }
+          );
         },
-      }
-    );
+        // Mobile - Accordion view (no GSAP scroll needed)
+        "(max-width: 1023px)": function() {
+           // Standard scroll is used for the vertical list
+        } 
+      });
+    }, triggerRef);
 
-    ScrollTrigger.refresh();
-
-    return () => {
-      pin.kill();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section id="company-projects" className="bg-paper relative z-10">
-      <div ref={triggerRef} className="h-screen w-full overflow-hidden">
-        <div ref={sectionRef} className="flex h-screen w-[500vw]">
+    <section id={id} className="relative z-10 overflow-hidden bg-white/20">
+      {/* 
+        Desktop Layout: Horizontal Scroll (GSAP Pin)
+      */}
+      <div 
+        ref={triggerRef} 
+        className="hidden lg:block h-screen w-full overflow-hidden"
+      >
+        <div 
+          ref={sectionRef} 
+          className="flex flex-row h-screen w-[400vw]"
+        >
           {projects.map((project, index) => (
             <div 
               key={project.id} 
-              className={`w-screen h-screen flex flex-col justify-center items-center px-4 md:px-20 relative border-r-2 border-dashed border-ink ${project.bgCol}`}
+              className="w-screen h-screen flex-shrink-0 flex flex-col justify-center items-center px-20 relative border-r-2 border-dashed border-ink/10"
             >
-              {/* Background Doodles specific to project */}
-               <div className="absolute top-10 left-10 text-9xl text-ink/5 font-heading -rotate-12 select-none -z-10">
+              {/* Vibrant Watercolor Backdrop */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 animate-fadeIn">
+                <div className={`absolute inset-0 opacity-20 ${project.bgCol}`}></div>
+                <div className={`absolute top-[-20%] right-[-10%] w-[90%] h-[90%] rounded-full watercolor-splash opacity-40 blur-[120px] ${project.bgCol.replace('bg-', 'bg-wc-').replace('-50', '')}`}></div>
+                <div className={`absolute bottom-[-10%] left-[-15%] w-[80%] h-[80%] rounded-full watercolor-splash opacity-35 blur-[140px] ${project.bgCol.replace('bg-', 'bg-wc-').replace('-50', '')}`}></div>
+                <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-10 mix-blend-overlay ${project.bgCol}`}></div>
+              </div>
+
+              <div className="absolute top-10 left-10 text-9xl text-ink/5 font-heading -rotate-12 select-none -z-10">
                   {index + 1}
                </div>
 
-              <div className="max-w-6xl w-full z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                 {/* Left Side: Problem & Title */}
-                 <div className="space-y-8 relative">
-                     {/* Sticky Note Badge */}
-                    <div className={`
-                        absolute -top-12 -left-4 px-6 py-3 bg-white border-2 border-ink shadow-hard
-                        transform -rotate-6 z-20
-                    `}>
-                        <span className="text-xl font-bold font-heading text-ink">
-                            {project.category}
-                        </span>
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 bg-red-400 rounded-full border-2 border-ink"></div>
-                    </div>
-
-                    <h3 className="text-4xl md:text-6xl font-heading font-bold text-ink leading-[1.1] transform rotate-1">
-                      <SplitText>{project.title}</SplitText>
-                    </h3>
-                     
-                     <div className="bg-white p-6 border-2 border-ink shadow-hard transform -rotate-1 relative">
-                        <span className="absolute -top-3 left-4 bg-primary text-white border-2 border-ink px-2 text-sm font-bold shadow-hard-sm">The Problem</span>
-                        <p className="text-xl text-ink leading-relaxed font-sans pt-2">
-                            {project.problem}
-                        </p>
-                     </div>
-                    
-                    <div className="pt-4">
-                       <h4 className="text-lg font-bold font-heading text-ink mb-4 underline decoration-wavy decoration-accent">Built With:</h4>
-                       <div className="flex flex-wrap gap-3">
-                          {project.stack.map((tech, i) => (
-                            <span key={i} className="px-3 py-1 bg-paper border-2 border-ink text-ink text-sm font-bold font-sans shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:scale-110 transition-transform cursor-default">
-                              {tech}
+              <div className="max-w-6xl w-full z-10 grid grid-cols-2 gap-12 items-center">
+                  <TiltWrapper className="order-1">
+                    <div className="space-y-12 relative mt-0">
+                        <div className="relative inline-block mb-4">
+                            <div className="transform -rotate-3 z-20 wc-wobbly-bg rounded-lg">
+                                <span className="text-2xl font-bold font-heading text-ink px-4 py-1">{project.category}</span>
+                                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-wc-rose rounded-full border-2 border-transparent wc-wobbly-bg shadow-md"></div>
+                            </div>
+                        </div>
+                        <h3 className="text-6xl font-heading font-bold text-ink leading-tight transform rotate-1">
+                          <SplitText>{project.title}</SplitText>
+                        </h3>
+                        <div className="bg-transparent p-8 shadow-xl transform -rotate-1 relative wc-wobbly-bg rounded-xl">
+                            <span className="relative inline-block mb-4">
+                                <span className="relative z-10 text-black px-4 py-1 text-sm font-bold rounded-full">The Problem</span>
+                                <span className="absolute -bottom-1 left-0 w-full h-1.5 bg-wc-yellow/30 -rotate-1"></span>
                             </span>
-                          ))}
-                       </div>
+                            <p className="text-2xl text-ink leading-relaxed font-sans pt-1 font-bold">{project.problem}</p>
+                        </div>
                     </div>
-                 </div>
+                  </TiltWrapper>
 
-                 {/* Right Side: Solution Card */}
-                 <div className="p-8 md:p-12 bg-white border-2 border-ink shadow-hard-xl rotate-1 relative">
-                    {/* Folder Tab Look */}
-                    <div className="absolute -top-6 right-0 w-32 h-8 bg-white border-t-2 border-l-2 border-r-2 border-ink rounded-t-lg"></div>
-                    
-                    <div className="space-y-8 relative z-10">
-                       <div>
-                          <h4 className="text-2xl font-bold font-heading text-ink mb-2 border-b-2 border-accent inline-block">The Solution</h4>
-                          <p className="text-ink leading-relaxed text-lg font-sans">{project.solution}</p>
-                       </div>
-                       <div>
-                          <h4 className="text-2xl font-bold font-heading text-ink mb-2 border-b-2 border-secondary inline-block">The Impact</h4>
-                          <p className="text-ink leading-relaxed text-lg font-sans">{project.impact}</p>
-                       </div>
-                       {project.url && (
-                          <div className="pt-6 border-t-2 border-dashed border-ink flex justify-end">
-                            <a href={project.url} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 px-6 py-3 bg-primary text-white border-2 border-ink font-bold font-heading shadow-hard hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                               See It Live 
-                               <span className="transform group-hover:rotate-45 transition-transform inline-block">&rarr;</span>
-                            </a>
+                  <TiltWrapper className="order-2">
+                    <div className="p-12 bg-transparent shadow-xl rotate-1 relative wc-wobbly-bg rounded-2xl">
+                        <div className="absolute inset-16 bg-wc-blue/5 rounded-full blur-3xl -z-10"></div>
+                        <div className="space-y-12 relative z-10">
+                          <div>
+                              <h4 className="text-4xl font-bold font-heading text-ink mb-4 relative inline-block">
+                                  The Solution
+                                  <span className="absolute -bottom-1 left-0 w-full h-1.5 bg-wc-blue/30 -rotate-1"></span>
+                              </h4>
+                              <p className="text-ink leading-relaxed text-xl font-sans font-bold">{project.solution}</p>
                           </div>
-                       )}
+                          <div>
+                              <h4 className="text-4xl font-bold font-heading text-ink mb-4 relative inline-block">
+                                  The Impact
+                                  <span className="absolute -bottom-1 left-0 w-full h-2 bg-wc-teal/40 rotate-1"></span>
+                              </h4>
+                              <p className="text-ink leading-relaxed text-xl font-sans font-bold">{project.impact}</p>
+                          </div>
+                          {project.url && (
+                              <div className="pt-8 border-t-2 border-ink/5 flex justify-end">
+                                  <a href={project.url} target="_blank" rel="noopener noreferrer" className="bg-wc-rose rounded-full px-4 py-2 text-white hover:bg-wc-blue/80 transition-colors">
+                                  See It Live <span className="transform group-hover:rotate-45 transition-transform inline-block b">&rarr;</span>
+                                  </a>
+                              </div>
+                          )}
+                        </div>
                     </div>
-                 </div>
+                  </TiltWrapper>
               </div>
 
-               {/* Mountain Stamp & Milestone - Outside content grid, anchored to viewport */}
-               <div className="absolute bottom-0 right-0 md:bottom-2 md:right-10 w-64 h-48 opacity-90 pointer-events-none z-0 flex flex-col items-end">
-                   <p className="font-heading text-2xl text-ink rotate-[-5deg] mr-12 mb-[-20px] transform translate-y-4">
-                      {project.milestone || `Camp ${index + 1}`}
-                   </p>
-                   <img src={mountainsIll} alt="Mountain Milestone" className="w-full h-full object-contain object-bottom drop-shadow-xl" />
+               <div className="absolute bottom-2 right-10 w-64 h-48 opacity-90 pointer-events-none z-0 flex flex-col items-end">
+                   <p className="font-heading text-2xl text-ink/60 rotate-[-5deg] mr-12 mb-[-20px] transform translate-y-4">{project.milestone || `Camp ${index + 1}`}</p>
+                   <img src={mountainsIll} alt="Mountain Milestone" className="w-full h-full object-contain object-bottom" />
                </div>
 
-               {/* Footsteps Trail - Connecting to next project */}
                {index !== projects.length - 1 && (
-                  <div className="absolute bottom-10 -right-20 md:-right-32 w-48 h-24 opacity-60 pointer-events-none transform rotate-12 z-0 hidden md:block">
-                      <img src={footstepsIll} alt="Trail" className="w-full h-full object-contain filter contrast-125" />
+                  <div className="absolute bottom-10 -right-32 w-48 h-24 opacity-30 pointer-events-none transform rotate-12 z-0">
+                      <img src={footstepsIll} alt="Trail" className="w-full h-full object-contain filter contrast-125 grayscale" />
                   </div>
                )}
-
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* 
+        Mobile Layout: Vertical Accordion List
+      */}
+      <div className="lg:hidden py-16 px-4 space-y-6">
+        <div className="mb-12 text-center relative z-10 px-4">
+             <h2 className="text-3xl font-bold font-heading text-ink transform rotate-1 inline-block relative px-4 py-2">
+               Project <span className="text-ink bg-wc-rose px-3 py-1 wc-wobbly-bg shadow-md ml-1">Archive</span>
+             </h2>
+             <p className="mt-4 text-ink/60 font-sans font-bold text-sm uppercase tracking-widest">Select a trail to explore details</p>
+        </div>
+
+        {projects.map((project, index) => (
+          <div key={project.id} className="relative">
+            {/* Project Header (Accordion Trigger) */}
+            <button 
+              onClick={() => setExpandedId(expandedId === project.id ? null : project.id)}
+              className={`w-full text-left p-6 transition-all duration-300 relative z-10 rounded-xl wc-wobbly-bg shadow-lg flex items-center justify-between
+                ${expandedId === project.id ? 'bg-wc-blue text-white scale-[1.02]' : 'bg-white text-ink'}
+              `}
+            >
+              <div className="flex flex-col">
+                <span className={`text-[10px] uppercase font-bold tracking-widest mb-1 ${expandedId === project.id ? 'text-wc-rose/80' : 'text-wc-rose'}`}>
+                    {project.category}
+                </span>
+                <h3 className={`text-xl font-bold font-heading leading-tight ${expandedId === project.id ? 'text-wc-blue' : 'text-ink'}`}>{project.title}</h3>
+              </div>
+              <span className={`text-2xl transition-transform duration-300 ${expandedId === project.id ? 'rotate-180' : ''}`}>
+                ↓
+              </span>
+            </button>
+
+            {/* Accordion Content */}
+            <div className={`
+              overflow-hidden transition-all duration-500 ease-in-out
+              ${expandedId === project.id ? 'max-h-[2000px] opacity-100 mt-6' : 'max-h-0 opacity-0'}
+            `}>
+              <div className="space-y-6 px-2 pb-8">
+                {/* Problem Card */}
+                <div className="p-6 bg-white shadow-md transform -rotate-1 wc-wobbly-bg rounded-lg border border-ink/5">
+                    <span className="inline-block bg-wc-rose text-white text-[10px] font-bold px-2 py-0.5 rounded mb-3 uppercase">The Problem</span>
+                    <p className="text-lg text-ink font-bold font-sans leading-relaxed">{project.problem}</p>
+                </div>
+
+                {/* Solution & Impact Card */}
+                <div className="p-6 bg-white shadow-md transform rotate-1 wc-wobbly-bg rounded-lg border border-ink/5 space-y-8">
+                    <div>
+                        <span className="inline-block bg-wc-teal text-white text-[10px] font-bold px-2 py-0.5 rounded mb-3 uppercase">The Solution</span>
+                        <p className="text-base text-ink font-bold font-sans leading-relaxed">{project.solution}</p>
+                    </div>
+                    <div>
+                        <span className="inline-block bg-wc-yellow text-ink text-[10px] font-bold px-2 py-0.5 rounded mb-3 uppercase">The Impact</span>
+                        <p className="text-base text-ink font-bold font-sans leading-relaxed">{project.impact}</p>
+                    </div>
+                    
+                    {project.url && (
+                        <a 
+                          href={project.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex items-center justify-center gap-2 w-full py-4 bg-wc-blue text-wc-rose font-bold rounded-lg shadow-xl wc-wobbly-bg text-lg active:scale-95 transition-transform"
+                        >
+                          See It Live &rarr;
+                        </a>
+                    )}
+                </div>
+              </div>
+            </div>
+            
+            {/* Visual connector steps between items */}
+            {index !== projects.length - 1 && (
+              <div className="flex justify-center py-4 opacity-10">
+                <div className="w-1 h-12 border-l-2 border-dashed border-ink"></div>
+              </div>
+            )}
+          </div>
+        ))}
+        
+        {/* Mobile View: Small mountain stamp at end */}
+        <div className="flex justify-center pt-16 opacity-30 transform scale-75">
+            <img src={mountainsIll} alt="end of trail" className="w-48" />
         </div>
       </div>
     </section>

@@ -15,7 +15,7 @@ import { FaBrain, FaNetworkWired, FaDatabase, FaCloud, FaChartBar } from 'react-
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Skills = () => {
+const Skills = ({ id }) => {
   // Categorized Stacks
   const categories = [
       {
@@ -100,7 +100,7 @@ const Skills = () => {
   ];
 
   return (
-    <div className="py-20 bg-paper transition-colors duration-300 relative overflow-hidden" id="skills">
+    <div className="py-20 bg-paper transition-colors duration-300 relative overflow-hidden" id={id}>
       {/* Background Elements */}
       <div className="absolute top-20 left-10 w-64 h-64 bg-accent/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
