@@ -7,7 +7,7 @@ const projects = [
     title: "Village Festival Sharing App",
     description: "A community-driven app for sharing village festival event details, expenses, and image galleries.",
     stack: ["React.js", "Supabase", "PostgreSQL","Gallery", "Charts", "Tables", "Multi-tenant Architecture"],
-    url: "https://kpl-festivals.vercel.app/",
+    url: "https://fest-hub-livid.vercel.app/",
     tags: "Community App",
     img: "https://placehold.co/600x400/1e293b/FFFFFF/png?text=Festival+App+UI" 
   },
