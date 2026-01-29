@@ -1,7 +1,35 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FaCompass, FaMapMarkerAlt } from 'react-icons/fa';
+import { 
+  FaCompass, 
+  FaMapMarkerAlt,
+  FaRobot,
+  FaBrain,
+  FaDatabase,
+  FaEnvelope,
+  FaFileExcel,
+  FaChartPie
+} from 'react-icons/fa';
+import { 
+  SiReact, 
+  SiSupabase, 
+  SiPostgresql, 
+  SiMongodb, 
+  SiWhatsapp, 
+  SiJavascript,
+  SiPython,
+  SiStreamlit,
+  SiPandas,
+  SiPlotly,
+  SiNumpy,
+  SiFlask,
+  SiGoogle,
+  SiTailwindcss,
+  SiPytorch,
+  SiOpencv,
+  SiMaterialdesign
+} from 'react-icons/si';
 import { GiPineTree } from 'react-icons/gi';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -165,12 +193,54 @@ const Experience = ({ id }) => {
                           {project.details}
                         </p>
                         <div className="flex flex-wrap gap-2">
-                           <span className="font-bold text-xs uppercase text-ink/60 mr-2 self-center">Gear:</span>
-                          {project.tech.split(',').map((tech, tIdx) => (
-                            <span key={tIdx} className="px-3 py-0.5 text-xs bg-white text-ink border border-ink/30 font-bold font-sans rounded-full shadow-sm">
-                              {tech.trim()}
-                            </span>
-                          ))}
+                           <span className="font-bold text-[10px] uppercase text-ink/40 mr-2 self-center tracking-widest">Gear:</span>
+                          {project.tech.split(',').map((techName, tIdx) => {
+                            const tech = techName.trim();
+                            const getSkillColor = (skill) => {
+                                const s = skill.toLowerCase();
+                                if (s.includes('react')) return 'bg-wc-blue';
+                                if (s.includes('supabase') || s.includes('mongodb') || s.includes('postgres') || s.includes('sheets') || s.includes('sql')) return 'bg-wc-teal';
+                                if (s.includes('python') || s.includes('flask')) return 'bg-wc-yellow';
+                                if (s.includes('gemini') || s.includes('yolo') || s.includes('streamlit') || s.includes('vision') || s.includes('ai')) return 'bg-wc-rose';
+                                if (s.includes('aws') || s.includes('ec2') || s.includes('s3') || s.includes('pytorch')) return 'bg-wc-violet';
+                                return 'bg-wc-blue';
+                            };
+
+                            const getSkillIcon = (skill) => {
+                                const s = skill.toLowerCase();
+                                if (s.includes('python')) return <SiPython className="text-[#3776AB]" />;
+                                if (s.includes('streamlit')) return <SiStreamlit className="text-[#FF4B4B]" />;
+                                if (s.includes('pandas')) return <SiPandas className="text-[#150458]" />;
+                                if (s.includes('plotly')) return <SiPlotly className="text-[#3F4F75]" />;
+                                if (s.includes('numpy')) return <SiNumpy className="text-[#013243]" />;
+                                if (s.includes('aws') || s.includes('s3') || s.includes('ec2')) return <FaAws className="text-[#FF9900]" />;
+                                if (s.includes('flask')) return <SiFlask className="text-ink" />;
+                                if (s.includes('mongo')) return <SiMongodb className="text-[#47A248]" />;
+                                if (s.includes('gemini') || s.includes('google')) return <SiGoogle className="text-[#4285F4]" />;
+                                if (s.includes('react')) return <SiReact className="text-[#61DAFB]" />;
+                                if (s.includes('tailwind')) return <SiTailwindcss className="text-[#06B6D4]" />;
+                                if (s.includes('pytorch')) return <SiPytorch className="text-[#EE4C2C]" />;
+                                if (s.includes('opencv') || s.includes('vision')) return <SiOpencv className="text-[#5C3EE8]" />;
+                                if (s.includes('yolo')) return <FaRobot className="text-rose-500" />;
+                                if (s.includes('transformer') || s.includes('brain') || s.includes('ai')) return <FaBrain className="text-purple-500" />;
+                                if (s.includes('sheets') || s.includes('excel')) return <FaFileExcel className="text-[#1D6F42]" />;
+                                if (s.includes('email')) return <FaEnvelope className="text-blue-400" />;
+                                if (s.includes('mui') || s.includes('material')) return <SiMaterialdesign className="text-[#757575]" />;
+                                if (s.includes('js') || s.includes('javascript')) return <SiJavascript className="text-yellow-400" />;
+                                return <FaDatabase className="text-slate-400" />;
+                            };
+
+                            const colorClass = getSkillColor(tech);
+                            return (
+                                <span key={tIdx} className="relative inline-block group/tag">
+                                    <span className="relative z-10 flex items-center gap-1.5 text-[9px] font-black font-heading text-ink dark:text-zinc-200 px-2.5 py-1 uppercase tracking-tight">
+                                        <span className="text-xs">{getSkillIcon(tech)}</span>
+                                        {tech}
+                                    </span>
+                                    <span className={`absolute inset-0 ${colorClass}/20 dark:${colorClass}/10 wc-wobbly-bg transform ${tIdx % 2 === 0 ? 'rotate-1' : '-rotate-1'} group-hover/tag:scale-110 transition-transform`}></span>
+                                </span>
+                            );
+                          })}
                         </div>
                         </TiltWrapper>
                       ))}

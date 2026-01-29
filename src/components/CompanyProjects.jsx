@@ -5,6 +5,30 @@ import SplitText from './SplitText';
 import mountainsIll from '../assets/mountains.png';
 import footstepsIll from '../assets/footsteps.png';
 import TiltWrapper from './TiltWrapper';
+import { 
+  SiPython, 
+  SiStreamlit, 
+  SiPandas, 
+  SiPlotly, 
+  SiNumpy, 
+  SiAmazonwebservices, 
+  SiFlask, 
+  SiMongodb, 
+  SiGoogle, 
+  SiReact, 
+  SiTailwindcss, 
+  SiPytorch,
+  SiOpencv,
+  SiTensorflow
+} from 'react-icons/si';
+import { 
+  FaAws, 
+  FaRobot, 
+  FaFileExcel, 
+  FaEnvelope,
+  FaDatabase,
+  FaBrain
+} from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -137,9 +161,9 @@ const CompanyProjects = ({ id }) => {
                                 <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-wc-rose rounded-full border-2 border-transparent wc-wobbly-bg shadow-md"></div>
                             </div>
                         </div>
-                        <h3 className="text-6xl font-heading font-bold text-ink leading-tight transform rotate-1">
+                        <h2 className="text-5xl font-heading font-semibold text-ink leading-tight transform rotate-1">
                           <SplitText>{project.title}</SplitText>
-                        </h3>
+                        </h2>
                         <div className="bg-transparent p-8 shadow-xl transform -rotate-1 relative wc-wobbly-bg rounded-xl">
                             <span className="relative inline-block mb-4">
                                 <span className="relative z-10 text-black px-4 py-1 text-sm font-bold rounded-full">The Problem</span>
@@ -168,6 +192,57 @@ const CompanyProjects = ({ id }) => {
                               </h4>
                               <p className="text-ink leading-relaxed text-xl font-sans font-bold">{project.impact}</p>
                           </div>
+                          {/* Tech Stack (Gear) - Desktop */}
+                          <div className="pt-6">
+                              <h4 className="text-sm font-bold font-heading text-ink/40 dark:text-zinc-500 uppercase tracking-widest mb-4">Gear</h4>
+                              <div className="flex flex-wrap gap-3">
+                                  {project.stack.map((tech, i) => {
+                                      const getSkillColor = (skill) => {
+                                          const s = skill.toLowerCase();
+                                          if (s.includes('react')) return 'bg-wc-blue';
+                                          if (s.includes('supabase') || s.includes('mongodb') || s.includes('postgres') || s.includes('sheets')) return 'bg-wc-teal';
+                                          if (s.includes('python') || s.includes('flask')) return 'bg-wc-yellow';
+                                          if (s.includes('gemini') || s.includes('yolo') || s.includes('streamlit')) return 'bg-wc-rose';
+                                          if (s.includes('aws') || s.includes('ec2') || s.includes('s3') || s.includes('pytorch')) return 'bg-wc-violet';
+                                          return 'bg-wc-blue';
+                                      };
+
+                                      const getSkillIcon = (skill) => {
+                                          const s = skill.toLowerCase();
+                                          if (s.includes('python')) return <SiPython className="text-[#3776AB]" />;
+                                          if (s.includes('streamlit')) return <SiStreamlit className="text-[#FF4B4B]" />;
+                                          if (s.includes('pandas')) return <SiPandas className="text-[#150458]" />;
+                                          if (s.includes('plotly')) return <SiPlotly className="text-[#3F4F75]" />;
+                                          if (s.includes('numpy')) return <SiNumpy className="text-[#013243]" />;
+                                          if (s.includes('aws') || s.includes('s3') || s.includes('ec2')) return <FaAws className="text-[#FF9900]" />;
+                                          if (s.includes('flask')) return <SiFlask className="text-ink" />;
+                                          if (s.includes('mongo')) return <SiMongodb className="text-[#47A248]" />;
+                                          if (s.includes('gemini')) return <SiGoogle className="text-[#4285F4]" />;
+                                          if (s.includes('react')) return <SiReact className="text-[#61DAFB]" />;
+                                          if (s.includes('tailwind')) return <SiTailwindcss className="text-[#06B6D4]" />;
+                                          if (s.includes('pytorch')) return <SiPytorch className="text-[#EE4C2C]" />;
+                                          if (s.includes('opencv')) return <SiOpencv className="text-[#5C3EE8]" />;
+                                          if (s.includes('yolo')) return <FaRobot className="text-rose-500" />;
+                                          if (s.includes('transformer')) return <FaBrain className="text-purple-500" />;
+                                          if (s.includes('sheets')) return <FaFileExcel className="text-[#1D6F42]" />;
+                                          if (s.includes('email')) return <FaEnvelope className="text-blue-400" />;
+                                          return <FaDatabase className="text-slate-400" />;
+                                      };
+
+                                      const colorClass = getSkillColor(tech);
+                                      return (
+                                          <span key={i} className="relative inline-block group/tag">
+                                              <span className="relative z-10 flex items-center gap-2 text-[10px] font-black font-heading text-ink dark:text-zinc-200 px-3 py-1.5 uppercase tracking-tight">
+                                                  <span className="text-xs">{getSkillIcon(tech)}</span>
+                                                  {tech}
+                                              </span>
+                                              <span className={`absolute inset-0 ${colorClass}/20 dark:${colorClass}/10 wc-wobbly-bg transform ${i % 2 === 0 ? 'rotate-1' : '-rotate-1'} group-hover/tag:scale-110 transition-transform`}></span>
+                                          </span>
+                                      );
+                                  })}
+                              </div>
+                          </div>
+
                           {project.url && (
                               <div className="pt-8 border-t-2 border-ink/5 flex justify-end">
                                   <a href={project.url} target="_blank" rel="noopener noreferrer" className="bg-wc-rose rounded-full px-4 py-2 text-white hover:bg-wc-blue/80 transition-colors">
@@ -221,8 +296,8 @@ const CompanyProjects = ({ id }) => {
                 </span>
                 <h3 className={`text-xl font-bold font-heading leading-tight ${expandedId === project.id ? 'text-wc-blue' : 'text-ink'}`}>{project.title}</h3>
               </div>
-              <span className={`text-2xl transition-transform duration-300 ${expandedId === project.id ? 'rotate-180' : ''}`}>
-                ↓
+              <span className="text-2xl transition-all duration-300">
+                {expandedId === project.id ? '↑' : '↓'}
               </span>
             </button>
 
@@ -249,16 +324,78 @@ const CompanyProjects = ({ id }) => {
                         <p className="text-base text-ink font-bold font-sans leading-relaxed">{project.impact}</p>
                     </div>
                     
+                    {/* Tech Stack (Gear) - Mobile */}
+                    <div className="py-2">
+                        <span className="inline-block text-[10px] font-bold text-ink/40 uppercase tracking-widest mb-3">Gear</span>
+                        <div className="flex flex-wrap gap-3">
+                            {project.stack.map((tech, i) => {
+                                const getSkillColor = (skill) => {
+                                    const s = skill.toLowerCase();
+                                    if (s.includes('react')) return 'bg-wc-blue';
+                                    if (s.includes('supabase') || s.includes('mongodb') || s.includes('postgres') || s.includes('sheets')) return 'bg-wc-teal';
+                                    if (s.includes('python') || s.includes('flask')) return 'bg-wc-yellow';
+                                    if (s.includes('gemini') || s.includes('yolo') || s.includes('streamlit')) return 'bg-wc-rose';
+                                    if (s.includes('aws') || s.includes('ec2') || s.includes('s3') || s.includes('pytorch')) return 'bg-wc-violet';
+                                    return 'bg-wc-blue';
+                                };
+
+                                const getSkillIcon = (skill) => {
+                                    const s = skill.toLowerCase();
+                                    if (s.includes('python')) return <SiPython className="text-[#3776AB]" />;
+                                    if (s.includes('streamlit')) return <SiStreamlit className="text-[#FF4B4B]" />;
+                                    if (s.includes('pandas')) return <SiPandas className="text-[#150458]" />;
+                                    if (s.includes('plotly')) return <SiPlotly className="text-[#3F4F75]" />;
+                                    if (s.includes('numpy')) return <SiNumpy className="text-[#013243]" />;
+                                    if (s.includes('aws') || s.includes('s3') || s.includes('ec2')) return <FaAws className="text-[#FF9900]" />;
+                                    if (s.includes('flask')) return <SiFlask className="text-ink" />;
+                                    if (s.includes('mongo')) return <SiMongodb className="text-[#47A248]" />;
+                                    if (s.includes('gemini')) return <SiGoogle className="text-[#4285F4]" />;
+                                    if (s.includes('react')) return <SiReact className="text-[#61DAFB]" />;
+                                    if (s.includes('tailwind')) return <SiTailwindcss className="text-[#06B6D4]" />;
+                                    if (s.includes('pytorch')) return <SiPytorch className="text-[#EE4C2C]" />;
+                                    if (s.includes('opencv')) return <SiOpencv className="text-[#5C3EE8]" />;
+                                    if (s.includes('yolo')) return <FaRobot className="text-rose-500" />;
+                                    if (s.includes('transformer')) return <FaBrain className="text-purple-500" />;
+                                    if (s.includes('sheets')) return <FaFileExcel className="text-[#1D6F42]" />;
+                                    if (s.includes('email')) return <FaEnvelope className="text-blue-400" />;
+                                    return <FaDatabase className="text-slate-400" />;
+                                };
+
+                                const colorClass = getSkillColor(tech);
+                                return (
+                                    <span key={i} className="relative inline-block group/tag">
+                                        <span className="relative z-10 flex items-center gap-2 text-[9px] font-black font-heading text-ink dark:text-zinc-200 px-2.5 py-1.5 uppercase tracking-tight">
+                                            <span className="text-xs">{getSkillIcon(tech)}</span>
+                                            {tech}
+                                        </span>
+                                        <span className={`absolute inset-0 ${colorClass}/20 dark:${colorClass}/10 wc-wobbly-bg transform ${i % 2 === 0 ? 'rotate-1' : '-rotate-1'} group-hover/tag:scale-110 transition-transform`}></span>
+                                    </span>
+                                );
+                            })}
+                        </div>
+                    </div>
+
                     {project.url && (
                         <a 
                           href={project.url} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="flex items-center justify-center gap-2 w-full py-4 bg-wc-blue text-wc-rose font-bold rounded-lg shadow-xl wc-wobbly-bg text-lg active:scale-95 transition-transform"
+                          className="flex items-center justify-center gap-2 w-full py-4 bg-wc-blue text-wc-rose font-bold rounded-lg shadow-xl wc-wobbly-bg text-lg active:scale-95 transition-transform mt-4"
                         >
                           See It Live &rarr;
                         </a>
                     )}
+
+                    {/* Minimize Button */}
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setExpandedId(null);
+                      }}
+                      className="flex items-center justify-center gap-2 w-full py-3 bg-white text-ink font-bold rounded-lg border-2 border-dashed border-ink/10 shadow-sm active:scale-95 transition-transform mt-4"
+                    >
+                      <span className="text-xl">↑</span> Minimize Details
+                    </button>
                 </div>
               </div>
             </div>
