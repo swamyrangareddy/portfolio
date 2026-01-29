@@ -98,7 +98,7 @@ const pages = [
     type: "Advanced Access",
     content: (
       <div className="relative h-full flex flex-col justify-center">
-         <div className="absolute -bottom-4 -right-4 w-24 h-24 border-4 border-wc-rose/30 flex items-center justify-center rotate-12">
+         <div className="absolute -top-8 -right-4 w-24 h-24 border-4 border-wc-rose/30 flex items-center justify-center rotate-12">
             <span className="text-wc-rose font-black text-xs text-center leading-tight">BRAIN<br/>MAPPED<br/>2023</span>
         </div>
         <div className="space-y-4">
