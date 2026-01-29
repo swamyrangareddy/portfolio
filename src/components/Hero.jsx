@@ -136,18 +136,18 @@ const Hero = ({ id }) => {
             </p>
         </div>
 
-        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-20">
+         <div ref={ctaRef} className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-20">
           <a 
             href="#company-projects"
             ref={addToButtonsRef}
-            className="group px-8 py-4 bg-white text-black border-2 border-ink watercolor-border-varied rounded-xl font-black text-xl transition-all shadow-xl hover:scale-105 hover:bg-black hover:text-white"
+            className="group px-8 py-4 bg-white text-black border-2 border-ink watercolor-border-varied rounded-xl font-black text-xl transition-all shadow-xl hover:scale-105 hover:bg-wc-rose hover:text-white"
           >
             check_my_work()
           </a>
           <a 
             href="#contact" 
             ref={addToButtonsRef}
-            className="group px-8 py-4 bg-ink text-white border-2 border-ink watercolor-border-varied rounded-xl font-black text-xl transition-all shadow-xl hover:scale-105 hover:bg-white hover:text-ink"
+            className="group px-8 py-4 bg-wc-blue text-white border-2 border-ink watercolor-border-varied rounded-xl font-black text-xl transition-all shadow-xl hover:scale-105 hover:bg-white hover:text-ink"
           >
              Say Hello &rarr;
           </a>
