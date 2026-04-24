@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import SplitText from './SplitText';
 import magicBus from '../assets/magic_bus.png';
+import resumeDoc from '../assets/Swamyrangareddy_DataScientist_FullStackAI.docx';
 
 
 const Hero = ({ id }) => {
@@ -145,11 +146,12 @@ const Hero = ({ id }) => {
             check_my_work()
           </a>
           <a 
-            href="#contact" 
+            href={resumeDoc}
+            download="Swamyrangareddy_DataScientist_FullStackAI.docx"
             ref={addToButtonsRef}
             className="group px-8 py-4 bg-wc-blue text-white border-2 border-ink watercolor-border-varied rounded-xl font-black text-xl transition-all shadow-xl hover:scale-105 hover:bg-white hover:text-ink"
           >
-             Say Hello &rarr;
+             Download Resume &darr;
           </a>
         </div>
 

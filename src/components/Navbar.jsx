@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { HiMenu, HiX, HiMoon, HiSun } from 'react-icons/hi';
 
-const Navbar = ({ theme, toggleTheme, playSound }) => {
+const Navbar = ({ theme, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -20,12 +20,9 @@ const Navbar = ({ theme, toggleTheme, playSound }) => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#hero' },
     { name: 'Experience', href: '#experience' },
-    { name: 'Summary', href: '#summary' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Work', href: '#company-projects' },
-    { name: 'Side Projects', href: '#personal-projects' },
+    { name: 'Projects', href: '#company-projects' },
     { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -36,18 +33,7 @@ const Navbar = ({ theme, toggleTheme, playSound }) => {
         ? 'bg-paper/95 shadow-hard-sm border-b-2 border-ink' 
         : 'bg-transparent border-transparent'
     }`}>
-       {/* Hiking Trail Scroll Progress - Into the Wild Colors */}
-      <div className="absolute bottom-0 left-0 h-2 bg-ink/5 w-full overflow-hidden">
-          <div 
-            className="h-full bg-gradient-to-r from-wc-blue via-wc-teal to-wc-yellow watercolor-border opacity-80" 
-            style={{width: `${scrollProgress}%`}}
-          >
-               {/* Hiker/Bus Icon walking the trail */}
-               <div className="absolute -right-3 -top-3 text-xl transform -scale-x-100 transition-all duration-500">
-                   {scrollProgress > 98 ? '🚌' : '🚶'}
-               </div>
-          </div>
-      </div>
+
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -64,7 +50,6 @@ const Navbar = ({ theme, toggleTheme, playSound }) => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onMouseEnter={() => playSound('rustle')}
                   className="text-lg font-bold text-ink hover:text-wc-blue transition-all hover:scale-110 transform hover:-rotate-2 inline-block relative group"
                 >
                   {link.name}
@@ -74,7 +59,6 @@ const Navbar = ({ theme, toggleTheme, playSound }) => {
               <div className="h-6 w-0.5 bg-ink/10 mx-4 rotate-12"></div>
               <button
                 onClick={toggleTheme}
-                onMouseEnter={() => playSound('rustle')}
                 className="p-2 rounded-lg bg-white border-2 border-ink text-ink hover:bg-accent transition-all shadow-hard-sm"
               >
                 {theme === 'dark' ? <HiSun className="w-5 h-5" /> : <HiMoon className="w-5 h-5" />}

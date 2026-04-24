@@ -15,25 +15,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-import CustomCursor from './components/CustomCursor';
-import DoodleCanvas from './components/DoodleCanvas';
-import TrailMap from './components/TrailMap';
 
 function App() {
   const [theme, setTheme] = useState('light');
 
-  // Audio assets (using creative commons placeholder logic or base64 if needed)
-  // For now, we'll implement the logic to play sounds on hover/scroll
-  const playSound = (type) => {
-    // We can use a small sound pool for "rustle"
-    const audio = new Audio(`https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3`); // Short paper rustle
-    audio.volume = 0.1;
-    audio.play().catch(() => {}); // Catch browser autoplay blocks
-  };
+
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
-    playSound('rustle');
   };
 
   useEffect(() => {
@@ -53,11 +42,7 @@ function App() {
 
   return (
     <div className="min-h-screen text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
-       <CustomCursor playSound={playSound} />
-       <DoodleCanvas />
-       <TrailMap playSound={playSound} />
-
-      <Navbar theme={theme} toggleTheme={toggleTheme} playSound={playSound} />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
       
       <main className="w-full">
         <Hero id="hero" />

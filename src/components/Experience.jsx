@@ -45,7 +45,7 @@ const Experience = ({ id }) => {
     {
       role: 'Data Scientist / Full Stack AI Developer',
       company: 'Einsteinium Labs',
-      duration: '2023 - Present',
+      duration: '2024 - Present',
       description: 'Leading AI and full-stack development initiatives, building scalable applications and data solutions.',
       location: 'Remote / Hybrid',
       projects: [
@@ -146,7 +146,7 @@ const Experience = ({ id }) => {
                     {/* Stamp - Subtle Watercolor Dab */}
                     <div className="absolute -bottom-6 -right-6 w-32 h-32 border-4 border-wc-rose rounded-full flex items-center justify-center transform -rotate-12 opacity-80 pointer-events-none wc-wobbly-bg bg-white/40 shadow-xl z-20">
                         <span className="font-heading font-black text-wc-rose text-sm uppercase text-center">
-                             Log Entry <br/> 2023
+                             Log Entry <br/> 2024
                         </span>
                     </div>
 
