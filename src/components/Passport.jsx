@@ -1,8 +1,8 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FaGlobeAmericas, FaPassport, FaStamp, FaCode, FaCoffee } from 'react-icons/fa';
-import { SiReact, SiPython, SiTensorflow } from 'react-icons/si';
+import { FaGlobeAmericas, FaPassport, FaStamp, FaCode, FaCoffee, FaServer } from 'react-icons/fa';
+import { SiReact, SiPython, SiTensorflow, SiAmazon } from 'react-icons/si';
 import profilePhoto from '../assets/photo1.png';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -81,9 +81,9 @@ const Passport = () => {
 
                 {/* Right Page (Stamps & Stats) */}
                 <div className="w-full md:w-1/2 p-8 relative overflow-hidden bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.5)_0%,transparent_100%)]">
-                    <h4 className="font-heading text-xl text-[#8b5a2b]/50 uppercase tracking-widest text-center mb-8 border-b border-[#8b5a2b]/20 pb-2">Expedition Visas</h4>
+                    <h4 className="font-heading text-xl text-[#8b5a2b]/50 uppercase tracking-widest text-center mb-6 border-b border-[#8b5a2b]/20 pb-2">Expedition Visas</h4>
 
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-2 gap-4 items-center justify-items-center">
                         {/* Stamp 1 */}
                         <div className="group relative w-24 h-24 border-4 border-green-600/60 rounded-full flex flex-col items-center justify-center p-2 rotate-12 hover:scale-110 transition-transform cursor-default">
                             <FaStamp className="text-green-600/40 text-2xl mb-1" />
@@ -92,29 +92,39 @@ const Passport = () => {
                         </div>
 
                         {/* Stamp 2 */}
-                        <div className="group relative w-28 h-20 border-4 border-blue-600/50 rounded-lg flex flex-col items-center justify-center p-2 -rotate-6 hover:scale-110 transition-transform cursor-default ml-auto">
+                        <div className="group relative w-28 h-20 border-4 border-blue-600/50 rounded-lg flex flex-col items-center justify-center p-2 -rotate-6 hover:scale-110 transition-transform cursor-default">
                             <FaCode className="text-blue-600/40 text-2xl mb-1" />
                             <span className="text-blue-600/80 font-bold text-xs uppercase text-center leading-tight">Full Stack<br />Cleared</span>
                         </div>
 
                         {/* Stamp 3 */}
-                        <div className="group relative w-24 h-24 border-double border-4 border-red-500/60 rounded-full flex flex-col items-center justify-center p-2 rotate-[-10deg] hover:scale-110 transition-transform cursor-default mt-4">
+                        <div className="group relative w-24 h-24 border-double border-4 border-red-500/60 rounded-full flex flex-col items-center justify-center p-2 rotate-[-10deg] hover:scale-110 transition-transform cursor-default">
                             <SiReact className="text-red-500/40 text-3xl" />
                             <span className="text-red-500/60 font-bold text-[10px] uppercase mt-1">Class A</span>
                         </div>
 
                         {/* Stamp 4 */}
-                        <div className="group relative w-28 h-20 border-dashed border-2 border-purple-600/60 rounded flex flex-col items-center justify-center p-2 rotate-3 hover:scale-110 transition-transform cursor-default mt-2">
+                        <div className="group relative w-28 h-20 border-dashed border-2 border-purple-600/60 rounded flex flex-col items-center justify-center p-2 rotate-3 hover:scale-110 transition-transform cursor-default">
                             <div className="flex gap-2">
                                 <SiPython className="text-purple-600/40 text-xl" />
                                 <SiTensorflow className="text-purple-600/40 text-xl" />
                             </div>
                             <span className="text-purple-600/80 font-bold text-xs uppercase text-center leading-tight mt-1">AI/ML<br />Certified</span>
                         </div>
+
+                        {/* Stamp 5 - AWS EC2 Deployment */}
+                        <div className="group relative w-32 h-20 border-4 border-amber-600/60 rounded-md flex flex-col items-center justify-center p-2 rotate-[-4deg] hover:scale-110 transition-transform cursor-default col-span-2 mt-1 bg-amber-500/5">
+                            <div className="flex items-center gap-1.5 mb-1">
+                                <SiAmazon className="text-amber-600/60 text-xl" />
+                                <FaServer className="text-amber-600/60 text-sm" />
+                            </div>
+                            <span className="text-amber-600/90 font-bold text-xs uppercase text-center leading-tight">AWS EC2<br />DEPLOYED</span>
+                            <span className="text-[8px] text-amber-600/60 font-mono uppercase tracking-wider mt-0.5">CLOUD MANAGED</span>
+                        </div>
                     </div>
 
                     {/* Fun Stat Stamp */}
-                    <div className="absolute bottom-4 right-4 text-[#8b5a2b]/40 rotate-[-15deg]">
+                    <div className="absolute bottom-3 right-4 text-[#8b5a2b]/40 rotate-[-15deg]">
                         <div className="flex items-center gap-1 font-heading text-sm">
                             <FaCoffee /> Infinite Refills
                         </div>
