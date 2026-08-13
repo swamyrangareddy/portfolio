@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import backpackIll from '../assets/backpack.png';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -27,8 +27,8 @@ const Skills = () => {
               { name: 'PyTorch', icon: <SiPytorch className="text-orange-600" /> },
               { name: 'TensorFlow', icon: <SiTensorflow className="text-orange-500" /> },
               { name: 'HuggingFace', icon: <SiHuggingface className="text-yellow-400" /> },
+              { name: 'SpaCy / NLTK', icon: <span className="font-bold text-sm bg-blue-600 text-white px-1 rounded">NLP</span> },
               { name: 'YOLOv8', icon: <span className="font-bold text-sm bg-black text-white px-1 rounded">Y8</span> },
-              { name: 'NLP', icon: <span className="font-bold text-sm border border-current px-1 rounded">NLP</span> },
               { name: 'Deep Learning', icon: <SiKeras className="text-red-600" /> },
               { name: 'OpenCV', icon: <span className="font-bold text-sm border border-current px-1 rounded">CV</span> },
               { name: 'Transformers', icon: <span className="font-bold text-sm border border-current px-1 rounded">Trans</span> },
@@ -68,7 +68,7 @@ const Skills = () => {
               { name: 'Apache Spark', icon: <SiApachespark className="text-orange-500" /> },
               { name: 'Hadoop', icon: <SiApachehadoop className="text-yellow-500" /> },
               { name: 'ETL Pipelines', icon: <span className="font-bold text-sm">ETL</span> },
-              {name: "PostgreSQL", icon: <SiPostgresql className="text-blue-400" /> },
+              { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-400" /> },
           ]
       },
       {
@@ -81,7 +81,7 @@ const Skills = () => {
               { name: 'GCP (BigQuery)', icon: <SiGooglecloud className="text-blue-500" /> },
               { name: 'Docker', icon: <SiDocker className="text-blue-400" /> },
               { name: 'Git & GitHub', icon: <SiGithub className="text-black" /> },
-              {name: "Supabase", icon: <SiSupabase className="text-blue-400" /> },
+              { name: "Supabase", icon: <SiSupabase className="text-blue-400" /> },
           ]
       },
       {
@@ -91,13 +91,16 @@ const Skills = () => {
           description: 'Turning data into actionable insights.',
           skills: [
               { name: 'Streamlit', icon: <SiStreamlit className="text-red-500" /> },
+              { name: 'PowerBI', icon: <span className="font-bold text-sm text-yellow-600">PBI</span> },
+              { name: 'Tableau', icon: <span className="font-bold text-sm text-blue-600">Tbl</span> },
               { name: 'Plotly', icon: <SiPlotly className="text-blue-500" /> },
               { name: 'Matplotlib', icon: <span className="font-bold text-sm text-blue-600">Mpl</span> },
-              {name: 'Seaborn', icon: <span className="font-bold text-sm text-blue-600">Snb</span> },
-              {name: 'PowerBI', icon: <span className="font-bold text-sm text-blue-600">PBI</span> },
+              { name: 'Seaborn', icon: <span className="font-bold text-sm text-blue-600">Snb</span> },
             ]
       }
   ];
+
+  const [activeTab, setActiveTab] = useState(categories[0].id);
 
   return (
     <div className="py-20 bg-paper transition-colors duration-300 relative overflow-hidden" id="skills">
@@ -105,7 +108,7 @@ const Skills = () => {
       <div className="absolute top-20 left-10 w-64 h-64 bg-accent/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="relative mb-16 text-center">
+        <div className="relative mb-8 md:mb-16 text-center">
             <h2 className="text-4xl md:text-5xl font-bold font-heading text-ink transform rotate-1 mb-4 inline-block relative z-10">
               My <span className="text-white bg-primary px-2 border-2 border-ink shadow-hard-sm transform -rotate-2 inline-block">Survival Gear</span>
             </h2>
@@ -119,9 +122,36 @@ const Skills = () => {
             </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {/* Mobile: Category Tabs */}
+        <div className="md:hidden flex overflow-x-auto pb-6 gap-3 snap-x scrollbar-hide mb-4">
+            {categories.map((cat) => (
+                <button
+                    key={cat.id}
+                    onClick={() => setActiveTab(cat.id)}
+                    className={`
+                        flex items-center gap-2 px-4 py-2 rounded-full border-2 border-ink whitespace-nowrap snap-center transition-all duration-300
+                        ${activeTab === cat.id 
+                            ? 'bg-primary text-white shadow-hard-sm scale-105' 
+                            : 'bg-white text-ink hover:bg-accent'}
+                    `}
+                >
+                    <span className="text-lg">{cat.icon}</span>
+                    <span className="font-bold font-heading text-sm">{cat.title.split(' ')[0]}</span>
+                </button>
+            ))}
+        </div>
+
+        {/* Grid Layout (Desktop) / Active Tab (Mobile) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto min-h-[400px]">
             {categories.map((category, index) => (
-                <div key={category.id} className="group relative h-full">
+                // On mobile, only render the active tab. On desktop, render all.
+                <div 
+                    key={category.id} 
+                    className={`
+                        ${activeTab === category.id ? 'block' : 'hidden'} md:block 
+                        group relative h-full animate-fadeIn
+                    `}
+                >
                     {/* Sketchy Card Design */}
                     <div className={`
                         relative p-6 border-2 border-ink transition-all duration-300

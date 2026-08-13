@@ -82,7 +82,7 @@ const About = () => {
                 </p>
                 
                 <p className="text-lg md:text-xl text-ink/90 leading-relaxed font-sans">
-                   From computer vision systems detecting threats in X-rays to AI-powered ATS systems, I build products that solve real problems in the wild.
+                   With 2+ years of experience in a fast-paced startup environment at Einsteinium Labs, I build end-to-end data and AI-driven applications, from machine learning models and ETL pipelines to full-stack user experiences.
                 </p>
             </div>
 
@@ -95,8 +95,8 @@ const About = () => {
                     <div className="p-6 bg-white border-2 border-ink shadow-hard transform hover:-rotate-1 hover:shadow-none transition-all duration-300 relative">
                         {/* Tape */}
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-yellow-100/90 rotate-2 border-l border-r border-white/50 backdrop-blur-sm shadow-sm"></div>
-                        <h3 className="text-2xl font-bold font-heading text-ink mb-2">Data Science Roots</h3>
-                        <p className="text-ink/70 font-bold font-mono text-sm">CSV Analysis • Visualization • Python & Streamlit</p>
+                        <h3 className="text-2xl font-bold font-heading text-ink mb-2">Einsteinium Labs</h3>
+                        <p className="text-ink/70 font-bold font-mono text-sm">Data Scientist & AI Developer (2024 - Present)</p>
                     </div>
                 </div>
 
@@ -104,8 +104,8 @@ const About = () => {
                     <div className="p-6 bg-white border-2 border-ink shadow-hard transform hover:-rotate-1 hover:shadow-none transition-all duration-300 relative">
                         {/* Tape */}
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-yellow-100/90 -rotate-1 border-l border-r border-white/50 backdrop-blur-sm shadow-sm"></div>
-                        <h3 className="text-2xl font-bold font-heading text-ink mb-2">AI Product Development</h3>
-                        <p className="text-ink/70 font-bold font-mono text-sm">Gemini API • NLP • Computer Vision</p>
+                        <h3 className="text-2xl font-bold font-heading text-ink mb-2">ML, NLP & AI Products</h3>
+                        <p className="text-ink/70 font-bold font-mono text-sm">Scikit-learn • SpaCy/NLTK • Gemini API • YOLOv8</p>
                     </div>
                 </div>
 
@@ -113,8 +113,8 @@ const About = () => {
                     <div className="p-6 bg-white border-2 border-ink shadow-hard transform hover:-rotate-1 hover:shadow-none transition-all duration-300 relative">
                         {/* Tape */}
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-yellow-100/90 rotate-3 border-l border-r border-white/50 backdrop-blur-sm shadow-sm"></div>
-                        <h3 className="text-2xl font-bold font-heading text-ink mb-2">Full Stack Engineering</h3>
-                        <p className="text-ink/70 font-bold font-mono text-sm">ReactJS • Flask (REST APIs) • MongoDB</p>
+                        <h3 className="text-2xl font-bold font-heading text-ink mb-2">Data Systems & Cloud</h3>
+                        <p className="text-ink/70 font-bold font-mono text-sm">AWS Redshift/S3 • BigQuery • Spark • Power BI</p>
                     </div>
                 </div>
             </div>

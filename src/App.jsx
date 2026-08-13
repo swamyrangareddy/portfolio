@@ -8,7 +8,7 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import SectionWrapper from './components/SectionWrapper';
-// import Passport from './components/Passport';
+import Passport from './components/Passport';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -58,9 +58,9 @@ function App() {
           <About />
         </SectionWrapper>
 
-        {/* <SectionWrapper id="summary">
+         <SectionWrapper id="summary">
             <Passport />
-        </SectionWrapper> */}
+        </SectionWrapper> 
         
         <CompanyProjects />
         

@@ -92,14 +92,14 @@ const Navbar = ({ theme, toggleTheme }) => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-paper border-b-2 border-ink shadow-hard p-4 absolute w-full top-20 left-0">
+        <div className="md:hidden bg-paper/95 backdrop-blur-md border-b-2 border-ink shadow-hard p-4 absolute w-full top-20 left-0 animate-slideDown origin-top z-40">
           <div className="space-y-4">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 rounded-lg border-2 border-ink bg-white text-lg font-bold text-ink hover:bg-primary hover:text-white hover:shadow-hard-sm transition-all transform hover:-rotate-1"
+                className="block px-4 py-3 rounded-lg border-2 border-ink bg-white/80 text-lg font-bold text-ink hover:bg-primary hover:text-white hover:shadow-hard-sm transition-all transform hover:-rotate-1"
               >
                 {link.name}
               </a>

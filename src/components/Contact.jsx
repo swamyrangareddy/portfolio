@@ -58,7 +58,7 @@ const Contact = () => {
 
           <div className="flex justify-center gap-8 mb-16">
             <a 
-              href="https://www.linkedin.com/in/swamyrangareddy" 
+              href="https://www.linkedin.com/in/swamyrangareddy-muthumula-85863424b" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-4 bg-white border-2 border-ink rounded-full shadow-hard hover:shadow-none hover:bg-blue-100 hover:translate-x-[2px] hover:translate-y-[2px] transition-all group"
@@ -67,7 +67,7 @@ const Contact = () => {
               <SiLinkedin className="w-8 h-8 text-ink group-hover:scale-110 transition-transform" />
             </a>
             <a 
-              href="mailto:swamyrangareddy@example.com" 
+              href="mailto:swamirangareddy2@gmail.com" 
               className="p-4 bg-white border-2 border-ink rounded-full shadow-hard hover:shadow-none hover:bg-red-100 hover:translate-x-[2px] hover:translate-y-[2px] transition-all group"
               aria-label="Email"
             >

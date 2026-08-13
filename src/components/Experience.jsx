@@ -14,37 +14,37 @@ const Experience = () => {
 
   const experiences = [
     {
-      role: 'Data Scientist / Full Stack AI Developer',
-      company: 'Startup',
-      duration: '2023 - Present',
-      description: 'Leading AI and full-stack development initiatives, building scalable applications and data solutions.',
-      location: 'Remote / Hybrid',
+      role: 'Data Scientist / Full-Stack AI Developer',
+      company: 'Einsteinium Labs',
+      duration: 'June 2024 - Present',
+      description: 'Designing and developing end-to-end AI-powered applications combining data science, machine learning models, backend APIs, and modern frontend interfaces in a fast-paced startup environment.',
+      location: 'Startup',
       projects: [
         {
-          title: 'ATS Application',
-          tech: 'ReactJS, Material UI, Flask, MongoDB, Gemini API',
-          details: 'Built a comprehensive Applicant Tracking System with resume parsing via Gemini API and semantic search.'
+          title: 'AI-Powered Resume Screening Platform',
+          tech: 'ReactJS, Flask, MongoDB, Python, SpaCy, NLTK, Gemini API',
+          details: 'Built a full-stack AI system to automate candidate screening for recruiters. Implemented NLP-based resume parsing, skill matching, and role-based access control.'
         },
         {
-          title: 'Medical Appointment System',
-          tech: 'ReactJS, Full Stack',
-          details: 'Developing a multi-user platform for doctors, patients, and labs with role-based access control.'
+          title: 'Predictive Analytics for Business Forecasting',
+          tech: 'Python, scikit-learn, Pandas, SQL, Streamlit, AWS S3',
+          details: 'Developed ML models to forecast business trends and demand patterns. Performed EDA to identify key drivers and deployed interactive Streamlit applications.'
         },
         {
-          title: 'Data Visualization Dashboards',
-          tech: 'Python, Streamlit',
-          details: 'Analyzed complex CSV datasets and built interactive dashboards to visualize key business metrics.'
+          title: 'Automated Data Visualization & Reporting System',
+          tech: 'Power BI, Tableau, Python, SQL, Plotly, Streamlit',
+          details: 'Built dashboards for real-time tracking of business metrics, integrating data from databases, APIs, and CSV files for unified reporting.'
         },
         {
-          title: 'Company Website',
-          tech: 'Web Tech, Google Sheets API',
-          details: 'Developed the official company website (einsteiniumlabs.com) with custom form integration.',
+          title: 'Data Warehousing & ETL Pipeline',
+          tech: 'SQL, Python, Apache Spark, AWS Redshift, Google BigQuery',
+          details: 'Designed scalable ETL pipelines for structured and unstructured data, optimizing storage and query performance using AWS Redshift, BigQuery, and Apache Spark.'
+        },
+        {
+          title: 'Einsteinium Labs Corporate Website',
+          tech: 'ReactJS, Tailwind CSS, Google Sheets API, EmailJS',
+          details: 'Developed the official corporate website with custom form integration and zero-cost backend lead collection.',
           link: 'https://www.einsteiniumlabs.com/'
-        },
-        {
-          title: 'Object Detection System',
-          tech: 'YOLOv8, Computer Vision',
-          details: 'Trained and deployed a custom YOLOv8 model for x-ray bag scanning to detect prohibited items.'
         }
       ]
     }
@@ -124,7 +124,7 @@ const Experience = () => {
                     {/* Stamp */}
                     <div className="absolute -bottom-4 -right-4 w-24 h-24 border-4 border-primary/30 rounded-full flex items-center justify-center transform -rotate-12 opacity-70 pointer-events-none">
                         <span className="font-heading font-bold text-primary/30 text-xs uppercase text-center p-2">
-                             Log Entry <br/> 2023
+                             Log Entry <br/> 2024
                         </span>
                     </div>
 
